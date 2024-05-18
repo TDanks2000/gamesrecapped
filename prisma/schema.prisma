@@ -11,11 +11,11 @@ datasource db {
 }
 
 model Game {
-  id           Int      @id @unique @default(autoincrement())
+  id           Int       @id @unique @default(autoincrement())
   title        String
-  release_date String?
+  release_date DateTime?
   genres       String[]
-  isExcusive   String
+  isExcusive   Boolean
   isGameUpdate Boolean
   isDLC        Boolean
   hasMP        Boolean
@@ -25,8 +25,8 @@ model Game {
 
   media Media[]
 
-  conference    Conference @relation(fields: [conference_id], references: [id])
-  conference_id Int
+  conference    Conference? @relation(fields: [conference_id], references: [id])
+  conference_id Int?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())

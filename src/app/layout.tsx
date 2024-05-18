@@ -5,6 +5,7 @@ import { GeistSans } from "geist/font/sans";
 import { TRPCReactProvider } from "@/trpc/react";
 import { ThemeProvider } from "next-themes";
 
+import { Toaster } from "@/components/ui/sonner";
 import "@/styles/globals.css";
 
 export const metadata = {
@@ -28,6 +29,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TRPCReactProvider>{children}</TRPCReactProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
