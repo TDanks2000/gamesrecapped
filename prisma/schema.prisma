@@ -2,19 +2,58 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model Game {
+  id           Int      @id @unique @default(autoincrement())
+  title        String
+  release_date String?
+  genres       String[]
+  isExcusive   String
+  isGameUpdate Boolean
+  isDLC        Boolean
+  hasMP        Boolean
+  hasSP        Boolean
+  devloper     String[]
+  publisher    String[]
 
-    @@index([name])
+  media Media[]
+
+  conference    Conference @relation(fields: [conference_id], references: [id])
+  conference_id Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Conference {
+  id         Int      @id @unique @default(autoincrement())
+  start_time DateTime
+  end_time   DateTime
+  name       String   @unique
+  games      Game[]
+  streams    Stream[]
+}
+
+model Media {
+  id      Int    @id @unique @default(autoincrement())
+  type    String
+  link    String
+  game    Game?  @relation(fields: [game_id], references: [id])
+  game_id Int?
+}
+
+model Stream {
+  id           Int         @id @unique @default(autoincrement())
+  title        String      @unique
+  link         String
+  isLiveNow    Boolean     @default(false)
+  Conference   Conference? @relation(fields: [conferenceId], references: [id])
+  conferenceId Int?
 }
