@@ -3,7 +3,7 @@ import {
   CalendarDaysIcon,
   GamepadIcon,
   HomeIcon,
-  Package2Icon,
+  ShieldIcon,
   SquarePlayIcon,
 } from "lucide-react";
 import Link from "next/link";
@@ -16,7 +16,10 @@ const AdminSideNavigation = () => {
           href="#"
           className="group flex size-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
         >
-          <Package2Icon className="size-4 transition-all group-hover:scale-110" />
+          <ShieldIcon
+            className="size-5 transition-all group-hover:scale-110"
+            fill="black"
+          />
           <span className="sr-only">Acme Inc</span>
         </Link>
 

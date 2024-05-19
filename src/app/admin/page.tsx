@@ -12,6 +12,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -25,10 +26,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { api } from "@/trpc/server";
 import { File, ListFilter, PlusCircle, Search } from "lucide-react";
 import Link from "next/link";
 
 export default async function AdminPage() {
+  const total = await api.game.count();
+  const offset = 0;
+  const limit = 10;
+
   return (
     <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -112,6 +118,17 @@ export default async function AdminPage() {
               <CardContent>
                 <TableGames />
               </CardContent>
+
+              <CardFooter>
+                <div className="text-xs text-muted-foreground">
+                  Showing{" "}
+                  <strong>
+                    {offset + 1}-
+                    {offset + limit < total ? offset + limit : total}
+                  </strong>{" "}
+                  of <strong>{total}</strong> games
+                </div>
+              </CardFooter>
             </Card>
           </TabsContent>
         </Tabs>

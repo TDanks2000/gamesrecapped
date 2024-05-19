@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { GameSelect } from "@/@types";
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 
 export const gameRouter = createTRPCRouter({
@@ -45,8 +46,36 @@ export const gameRouter = createTRPCRouter({
         },
       });
     }),
-  all: publicProcedure.query(({ ctx }) => {
-    return ctx.db.game.findMany();
+  all: publicProcedure
+    .input(
+      z.object({
+        select: z.array(z.nativeEnum(GameSelect).optional()).optional(),
+        offset: z.number().optional(),
+        limit: z.number().optional(),
+      }),
+    )
+    .query(({ ctx, input }) => {
+      const select: {
+        [key in GameSelect]?: true;
+      } = {};
+
+      if (input.select) {
+        for (const item of input.select) {
+          if (!item) continue;
+          select[item] = true;
+        }
+      }
+
+      const data = ctx.db.game.findMany({
+        select: select,
+        skip: input.offset,
+        take: input.limit,
+      });
+
+      return data;
+    }),
+  count: publicProcedure.query(({ ctx }) => {
+    return ctx.db.game.count();
   }),
   search: publicProcedure
     .input(
@@ -55,12 +84,14 @@ export const gameRouter = createTRPCRouter({
       }),
     )
     .query(({ ctx, input }) => {
-      return ctx.db.game.findMany({
+      const data = ctx.db.game.findMany({
         where: {
           title: {
             contains: input.title,
           },
         },
       });
+
+      return data;
     }),
 });

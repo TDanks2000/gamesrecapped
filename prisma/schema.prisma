@@ -42,10 +42,11 @@ model Conference {
 }
 
 model Media {
-  id      Int    @id @unique @default(autoincrement())
+  id      Int     @id @unique @default(autoincrement())
   type    String
   link    String
-  game    Game?  @relation(fields: [game_id], references: [id])
+  isImage Boolean @default(false)
+  game    Game?   @relation(fields: [game_id], references: [id])
   game_id Int?
 }
 
