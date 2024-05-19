@@ -34,9 +34,9 @@ model Game {
 
 model Conference {
   id         Int      @id @unique @default(autoincrement())
+  name       String   @unique
   start_time DateTime
   end_time   DateTime
-  name       String   @unique
   games      Game[]
   streams    Stream[]
 }
