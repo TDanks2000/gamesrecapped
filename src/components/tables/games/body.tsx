@@ -33,7 +33,8 @@ const TableGamesBody = async () => {
             release_date={game.release_date}
             devloper={game.devloper}
             publisher={game.publisher}
-            media={game.media}
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+            media={(game as any).media}
           />
         ))}
       </TableBody>

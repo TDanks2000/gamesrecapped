@@ -1,4 +1,5 @@
 export enum GameSelect {
+  id = "id",
   title = "title",
   release_date = "release_date",
   genres = "genres",
@@ -10,4 +11,22 @@ export enum GameSelect {
   devloper = "devloper",
   publisher = "publisher",
   media = "media",
+}
+
+export enum ConferenceSelect {
+  id = "id",
+  name = "name",
+  start_time = "start_time",
+  end_time = "end_time",
+  games = "games",
+  streams = "streams",
+}
+
+export enum StreamSelect {
+  id = "id",
+  title = "title",
+  link = "link",
+  isLiveNow = "isLiveNow",
+  Conference = "Conference",
+  conferenceId = "conferenceId",
 }

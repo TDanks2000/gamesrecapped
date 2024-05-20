@@ -67,7 +67,7 @@ export const gameRouter = createTRPCRouter({
       }
 
       const data = ctx.db.game.findMany({
-        select: select,
+        select: !Object.values(select).length ? undefined : select,
         skip: input.offset,
         take: input.limit,
       });
