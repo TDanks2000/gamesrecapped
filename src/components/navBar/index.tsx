@@ -44,7 +44,7 @@ const NavBar = () => {
           Home
         </Link>
         <Link
-          href="#"
+          href="/faq"
           className={cn([
             "text-muted-foreground transition-colors hover:text-foreground",
             {
@@ -83,7 +83,7 @@ const NavBar = () => {
               Home
             </Link>
             <Link
-              href="#"
+              href="/faq"
               className={cn([
                 "text-muted-foreground hover:text-foreground",
                 {

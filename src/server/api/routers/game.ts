@@ -52,6 +52,7 @@ export const gameRouter = createTRPCRouter({
         select: z.array(z.nativeEnum(GameSelect).optional()).optional(),
         offset: z.number().optional(),
         limit: z.number().optional(),
+        sort: z.enum(["date-asc", "date-desc"]).optional(),
       }),
     )
     .query(({ ctx, input }) => {
@@ -72,6 +73,10 @@ export const gameRouter = createTRPCRouter({
         select: !Object.values(select).length ? undefined : select,
         skip: input.offset,
         take: input.limit,
+        orderBy: {
+          release_date:
+            input.sort && input.sort === "date-asc" ? "asc" : "desc",
+        },
       });
 
       return data;

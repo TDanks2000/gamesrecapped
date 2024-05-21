@@ -3,9 +3,9 @@
 import { GameSelect } from "@/@types";
 import GameCard from "@/components/cards/game";
 import { api } from "@/trpc/server";
-import { cache } from "react";
+import { cache, type FC } from "react";
 
-const getGames = cache(async () => {
+const getGames = cache(async (sort?: "date-asc" | "date-desc") => {
   const data = await api.game.all({
     select: [
       GameSelect.title,
@@ -16,13 +16,21 @@ const getGames = cache(async () => {
       GameSelect.devloper,
       GameSelect.publisher,
     ],
+    sort,
   });
 
   return data;
 });
 
-const GamesView = async () => {
-  const games = await getGames();
+interface GamesViewProps {
+  searchParams?: {
+    sort: "date-asc" | "date-desc";
+    [key: string]: string | undefined;
+  };
+}
+
+const GamesView: FC<GamesViewProps> = async ({ searchParams }) => {
+  const games = await getGames(searchParams?.sort);
 
   if (!games) return null;
 

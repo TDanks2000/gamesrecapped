@@ -11,17 +11,18 @@ datasource db {
 }
 
 model Game {
-  id           Int       @id @unique @default(autoincrement())
-  title        String
-  release_date DateTime?
-  genres       String[]
-  isExcusive   Boolean
-  isGameUpdate Boolean
-  isDLC        Boolean
-  hasMP        Boolean
-  hasSP        Boolean
-  devloper     String[]
-  publisher    String[]
+  id                Int       @id @unique @default(autoincrement())
+  title             String
+  release_date      DateTime?
+  genres            String[]
+  isExcusive        Boolean
+  exclusivePlatform String?
+  isGameUpdate      Boolean
+  isDLC             Boolean
+  hasMP             Boolean
+  hasSP             Boolean
+  devloper          String[]
+  publisher         String[]
 
   media Media[]
 
@@ -57,4 +58,23 @@ model Stream {
   isLiveNow    Boolean     @default(false)
   Conference   Conference? @relation(fields: [conferenceId], references: [id])
   conferenceId Int?
+}
+
+model Admin {
+  id       Int       @id @default(autoincrement())
+  username String    @unique
+  password String
+  sessions Session[]
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  adminId   Int
+  createdAt DateTime @default(now())
+
+  admin Admin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([adminId])
 }

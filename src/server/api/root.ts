@@ -1,3 +1,4 @@
+import { adminRouter } from "@/server/api/routers/admin";
 import { conferenceRouter } from "@/server/api/routers/conference";
 import { gameRouter } from "@/server/api/routers/game";
 import { streamRouter } from "@/server/api/routers/stream";
@@ -11,6 +12,7 @@ import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 export const appRouter = createTRPCRouter({
   game: gameRouter,
   conference: conferenceRouter,
+  admin: adminRouter,
   stream: streamRouter,
 });
 
