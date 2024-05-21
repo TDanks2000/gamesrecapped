@@ -45,7 +45,14 @@ const TableStreamsBodyItem: FC<TableGamesBodyItemProps> = (stream) => {
         </Badge>
       </TableCell>
       <TableCell className="hidden md:table-cell">
-        {!stream.link ? "Unknown" : stream.link}
+        <a
+          href={stream.link}
+          target="_blank"
+          rel="noreferrer"
+          className="transition-opacity hover:underline hover:opacity-80"
+        >
+          {stream.link}
+        </a>
       </TableCell>
       <TableCell className="hidden capitalize md:table-cell">
         {!stream.conferenceId ? "Unknown" : stream.conferenceId}

@@ -57,7 +57,9 @@ export const gameRouter = createTRPCRouter({
     .query(({ ctx, input }) => {
       const select: {
         [key in GameSelect]?: true;
-      } = {};
+      } = {
+        media: true,
+      };
 
       if (input.select) {
         for (const item of input.select) {

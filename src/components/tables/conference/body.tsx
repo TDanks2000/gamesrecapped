@@ -1,9 +1,18 @@
+import { ConferenceSelect } from "@/@types";
+import TableConferenceBodyItem from "@/components/tables/conference/item";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { api } from "@/trpc/server";
 import { cache } from "react";
 
 const getData = cache(async () => {
-  const data = await api.conference.all({});
+  const data = await api.conference.all({
+    select: [
+      ConferenceSelect.id,
+      ConferenceSelect.end_time,
+      ConferenceSelect.name,
+      ConferenceSelect.start_time,
+    ],
+  });
 
   return data;
 });
@@ -16,7 +25,13 @@ const TableConferenceBody = async () => {
       <TableBody>
         {!!data?.length ? (
           data.map((conference) => (
-            <TableConferenceBody key={conference.name} {...conference} />
+            <TableConferenceBodyItem
+              key={conference.name}
+              id={conference.id}
+              end_date={conference.end_time}
+              name={conference.name}
+              start_date={conference.start_time}
+            />
           ))
         ) : (
           <TableRow>

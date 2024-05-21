@@ -17,6 +17,7 @@ dayjs.extend(localizedFormat);
 import type { FC } from "react";
 
 interface TableGamesBodyItemProps {
+  id: number;
   name: string;
   start_date: Date | null;
   end_date: Date | null;
@@ -26,6 +27,7 @@ const TableConferenceBodyItem: FC<TableGamesBodyItemProps> = (conference) => {
   return (
     <TableRow key={conference.name}>
       <TableCell className="hidden aspect-square sm:table-cell"></TableCell>
+      <TableCell className="text-center font-medium">{conference.id}</TableCell>
       <TableCell className="font-medium">{conference.name}</TableCell>
       <TableCell>
         {!conference.start_date

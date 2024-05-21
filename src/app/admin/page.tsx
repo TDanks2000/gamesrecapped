@@ -102,9 +102,15 @@ export default async function AdminPage() {
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>Add new</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>Game</DropdownMenuItem>
-                  <DropdownMenuItem>Conference</DropdownMenuItem>
-                  <DropdownMenuItem>Stream</DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/admin/new/game">Game</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/admin/new/conference">Conference</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/admin/new/stream">Stream</Link>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>

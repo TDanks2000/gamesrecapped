@@ -3,10 +3,12 @@ import {
   CalendarDaysIcon,
   GamepadIcon,
   HomeIcon,
-  ShieldIcon,
   SquarePlayIcon,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+
+import logo from "@/assets/logo.png";
 
 const AdminSideNavigation = () => {
   return (
@@ -14,32 +16,35 @@ const AdminSideNavigation = () => {
       <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
         <Link
           href="#"
-          className="group flex size-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+          className="group flex size-9 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
         >
-          <ShieldIcon
-            className="size-5 transition-all group-hover:scale-110"
-            fill="black"
+          <Image
+            src={logo}
+            alt="Games Recaped Logo"
+            width={100}
+            height={100}
+            className="size-14 object-contain"
           />
-          <span className="sr-only">Acme Inc</span>
+          <span className="sr-only">Games Recaped</span>
         </Link>
 
-        <AdminLinkItem
-          title="Dashboard"
-          to="/admin/dashboard"
-          icon={<HomeIcon />}
-        />
+        <AdminLinkItem title="Home" to="/" icon={<HomeIcon />} />
 
-        <AdminLinkItem title="Games" to="/admin/games" icon={<GamepadIcon />} />
+        <AdminLinkItem
+          title="Games"
+          to="/admin/new/game"
+          icon={<GamepadIcon />}
+        />
 
         <AdminLinkItem
           title="Conferences"
-          to="/admin/conferences"
+          to="/admin/new/conference"
           icon={<CalendarDaysIcon />}
         />
 
         <AdminLinkItem
           title="Streams"
-          to="/admin/streams"
+          to="/admin/new/stream"
           icon={<SquarePlayIcon />}
         />
       </nav>

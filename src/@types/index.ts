@@ -11,6 +11,7 @@ export enum GameSelect {
   devloper = "devloper",
   publisher = "publisher",
   media = "media",
+  conference = "conference",
 }
 
 export enum ConferenceSelect {

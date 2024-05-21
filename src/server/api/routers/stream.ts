@@ -9,14 +9,13 @@ export const streamRouter = createTRPCRouter({
       z.object({
         title: z.string(),
         link: z.string(),
+        isLiveNow: z.boolean(),
+        conferenceId: z.number(),
       }),
     )
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({ ctx, input: data }) => {
       return ctx.db.stream.create({
-        data: {
-          title: input.title,
-          link: input.link,
-        },
+        data,
       });
     }),
   all: publicProcedure
