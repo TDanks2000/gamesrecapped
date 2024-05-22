@@ -19,7 +19,9 @@ export default async function Home({ searchParams }: PageProps) {
         <div className="flex justify-between">
           <h1 className="text-2xl font-bold">Games</h1>
           <div className="flex gap-2">
-            <HomeDropdown />
+            <Suspense fallback={<div>Loading...</div>}>
+              <HomeDropdown />
+            </Suspense>
 
             {/* <Button variant="outline" size="sm" className="h-8 gap-2">
               <FilterIcon className="size-3.5" />
