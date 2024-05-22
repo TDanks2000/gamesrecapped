@@ -1,4 +1,7 @@
+"use client";
+
 import AdminLinkItem from "@/components/admin/sideNav/linkItem";
+
 import {
   CalendarDaysIcon,
   GamepadIcon,
@@ -9,8 +12,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import logo from "@/assets/logo.png";
+import { usePathname } from "next/navigation";
 
 const AdminSideNavigation = () => {
+  const pathname = usePathname().toLowerCase();
+
+  if (pathname.includes("/login")) return null;
+
   return (
     <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-muted/40 sm:flex">
       <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">

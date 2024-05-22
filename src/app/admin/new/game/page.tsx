@@ -1,3 +1,4 @@
+import withAdmin from "@/components/HOC/withAuth";
 import AdminNewGameForm from "@/components/forms/newGame";
 import {
   Breadcrumb,
@@ -53,4 +54,4 @@ const AdminGamePage = () => {
   );
 };
 
-export default AdminGamePage;
+export default withAdmin(AdminGamePage);

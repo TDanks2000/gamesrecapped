@@ -1,11 +1,16 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
+  DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
+import { ArrowDownNarrowWide } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState, type FC } from "react";
 
@@ -27,23 +32,39 @@ const HomeDropdown: FC = () => {
   );
 
   return (
-    <DropdownMenuContent align="end">
-      <DropdownMenuLabel>Sort by</DropdownMenuLabel>
-      <DropdownMenuSeparator />
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="sm" className="h-8 gap-2  ">
+          <ArrowDownNarrowWide
+            className={cn([
+              "size-3.5 transition-all",
+              sortGamesBy === "date-asc" && "rotate-180",
+              sortGamesBy === "date-desc" && "rotate-0",
+            ])}
+          />
+          <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+            Sort
+          </span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuLabel>Sort by</DropdownMenuLabel>
+        <DropdownMenuSeparator />
 
-      <DropdownMenuCheckboxItem
-        checked={sortGamesBy === "date-desc" || !sortGamesBy}
-        onSelect={() => onSelect("date-desc")}
-      >
-        Date (newest first)
-      </DropdownMenuCheckboxItem>
-      <DropdownMenuCheckboxItem
-        checked={sortGamesBy === "date-asc"}
-        onSelect={() => onSelect("date-asc")}
-      >
-        Date (oldest first)
-      </DropdownMenuCheckboxItem>
-    </DropdownMenuContent>
+        <DropdownMenuCheckboxItem
+          checked={sortGamesBy === "date-desc" || !sortGamesBy}
+          onSelect={() => onSelect("date-desc")}
+        >
+          Date (newest first)
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={sortGamesBy === "date-asc"}
+          onSelect={() => onSelect("date-asc")}
+        >
+          Date (oldest first)
+        </DropdownMenuCheckboxItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

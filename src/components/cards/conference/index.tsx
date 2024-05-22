@@ -1,3 +1,6 @@
+"use client";
+
+import ConferenceUpNext from "@/components/cards/conference/upnext";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
@@ -51,7 +54,7 @@ const ConfernceCard: FC<ConfernceCardProps> = ({
     >
       <div className="absolute right-1 top-1">
         {isLive && <Badge variant="destructive">LIVE</Badge>}
-        {!isLive && isUpNext && <Badge variant="default">Next Up</Badge>}
+        {!isLive && isUpNext && <ConferenceUpNext date={start_time} />}
       </div>
 
       <div className="flex items-center gap-2">

@@ -1,3 +1,4 @@
+import withAdmin from "@/components/HOC/withAuth";
 import AdminConferenceTab from "@/components/admin/tabs/conference";
 import AdminGamesTab from "@/components/admin/tabs/games";
 import AdminStreamsTab from "@/components/admin/tabs/streams";
@@ -24,7 +25,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { File, ListFilter, PlusCircle, Search } from "lucide-react";
 import Link from "next/link";
 
-export default async function AdminPage() {
+async function AdminPage() {
   return (
     <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -124,3 +125,5 @@ export default async function AdminPage() {
     </div>
   );
 }
+
+export default withAdmin(AdminPage);

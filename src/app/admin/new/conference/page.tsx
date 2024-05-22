@@ -1,3 +1,4 @@
+import withAdmin from "@/components/HOC/withAuth";
 import AdminNewConferenceForm from "@/components/forms/newConference";
 import {
   Breadcrumb,
@@ -53,4 +54,4 @@ const AdminConferencePage = () => {
   );
 };
 
-export default AdminConferencePage;
+export default withAdmin(AdminConferencePage);

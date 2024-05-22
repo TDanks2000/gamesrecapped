@@ -1,14 +1,8 @@
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 import ConferencesView from "@/components/views/conferences";
 import GamesView from "@/components/views/games";
 import HomeDropdown from "@/components/views/homeDropdown";
 
-import { ArrowUpNarrowWide } from "lucide-react";
 import { Suspense } from "react";
 
 type PageProps = {
@@ -25,18 +19,7 @@ export default async function Home({ searchParams }: PageProps) {
         <div className="flex justify-between">
           <h1 className="text-2xl font-bold">Games</h1>
           <div className="flex gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className="h-8 gap-2">
-                  <ArrowUpNarrowWide className="size-3.5" />
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    Sort
-                  </span>
-                </Button>
-              </DropdownMenuTrigger>
-
-              <HomeDropdown />
-            </DropdownMenu>
+            <HomeDropdown />
 
             {/* <Button variant="outline" size="sm" className="h-8 gap-2">
               <FilterIcon className="size-3.5" />

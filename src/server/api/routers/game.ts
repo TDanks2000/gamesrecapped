@@ -101,4 +101,20 @@ export const gameRouter = createTRPCRouter({
 
       return data;
     }),
+  latest: publicProcedure.query(async ({ ctx }) => {
+    const games = await ctx.db.game.findMany({
+      orderBy: {
+        release_date: "desc",
+      },
+      take: 1,
+      select: {
+        media: true,
+        title: true,
+        release_date: true,
+      },
+    });
+
+    if (games?.length) return games[0];
+    return null;
+  }),
 });

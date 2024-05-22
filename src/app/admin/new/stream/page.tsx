@@ -1,3 +1,4 @@
+import withAdmin from "@/components/HOC/withAuth";
 import AdminNewStreamForm from "@/components/forms/newStream";
 import {
   Breadcrumb,
@@ -53,4 +54,4 @@ const AdminStreamPage = () => {
   );
 };
 
-export default AdminStreamPage;
+export default withAdmin(AdminStreamPage);

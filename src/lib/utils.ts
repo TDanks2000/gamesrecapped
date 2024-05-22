@@ -5,7 +5,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const getImageFromURL = (link: string) => {
+export const getImageFromURL = (link: string | null | undefined) => {
+  if (!link) return null;
+
   const url = new URL(link);
   const host = url.host.replaceAll("www.", "");
 
