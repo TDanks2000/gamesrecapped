@@ -80,7 +80,7 @@ const GameCard: FC<GameCardProps> = ({
       <div className="absolute inset-0 z-0 h-full w-full">
         <Image
           className="size-full object-cover transition-all ease-linear group-hover:-rotate-1 group-hover:scale-[1.01]"
-          src={image}
+          src={image ?? ""}
           alt="Game"
           width={300}
           height={300}

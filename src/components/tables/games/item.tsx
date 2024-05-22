@@ -45,7 +45,9 @@ const TableGamesBodyItem: FC<TableGamesBodyItemProps> = (game) => {
         ) : (
           <div className="relative aspect-square">
             <Image
-              src={media.isImage ? media.link : getImageFromURL(media.link)}
+              src={
+                media.isImage ? media.link : getImageFromURL(media.link) ?? ""
+              }
               alt={game.title}
               width={150}
               height={150}

@@ -1,4 +1,4 @@
-import AdminNewGameForm from "@/components/modals/newGame/form";
+import AdminNewGameForm from "@/components/forms/newGame";
 import {
   DialogContent,
   DialogHeader,
