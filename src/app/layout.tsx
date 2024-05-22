@@ -13,7 +13,7 @@ import NextTopLoader from "nextjs-toploader";
 
 export const metadata = {
   title: "Games Recaped",
-  description: "games recaped",
+  description: "Get the latest conference updates!",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -28,6 +28,15 @@ export default function RootLayout({
       className={`${GeistSans.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <meta property="og:title" content="Games Recaped" />
+        <meta
+          property="og:description"
+          content="Get the latest conference updates"
+        />
+        <meta property="og:image" content="/android-chrome-192x192.png" />
+        <meta property="og:image:type" content="image/png" />
+      </head>
       <body>
         <NextTopLoader
           color="#8700ed"
