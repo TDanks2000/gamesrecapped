@@ -35,7 +35,7 @@ const GamesView: FC<GamesViewProps> = async ({ searchParams }) => {
   if (!games) return null;
 
   return (
-    <div className="grid grid-cols-3 gap-4 overflow-hidden">
+    <div className="grid w-full grid-cols-1 gap-4 overflow-hidden md:grid-cols-3">
       {games.map((game) => (
         <GameCard
           key={game.id}

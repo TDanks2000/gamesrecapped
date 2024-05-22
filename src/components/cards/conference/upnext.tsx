@@ -17,7 +17,7 @@ const ConferenceUpNext: FC<ConferenceUpNextProps> = ({ date }) => {
   const countdown = useCountdown(date);
 
   return (
-    <Badge variant="default">
+    <Badge variant="default" className="text-xs md:text-sm">
       {!countdown
         ? "Next Up"
         : `${countdown.days}d ${countdown.hours}h ${countdown.minutes}m ${countdown.seconds}s`}

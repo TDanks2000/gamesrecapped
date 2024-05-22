@@ -4,12 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { Menu, PlayIcon, Search } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-import logo from "@/assets/logo.png";
 
 const NavBar = () => {
   const pathname = usePathname().toLowerCase();
@@ -24,7 +22,7 @@ const NavBar = () => {
           className="flex items-center gap-2 text-lg font-semibold md:text-base"
         >
           <Image
-            src={logo}
+            src={"/logo.png"}
             alt="Games Recaped Logo"
             width={100}
             height={100}
@@ -68,7 +66,13 @@ const NavBar = () => {
               href="#"
               className="flex items-center gap-2 text-lg font-semibold"
             >
-              <PlayIcon className="size-6 text-teal-500" />
+              <Image
+                src={"/logo.png"}
+                alt="Games Recaped Logo"
+                width={100}
+                height={100}
+                className="size-12 object-contain"
+              />
               <span className="sr-only">Games Recaped</span>
             </Link>
             <Link

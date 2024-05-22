@@ -69,7 +69,7 @@ const GameCard: FC<GameCardProps> = ({
       target="_blank"
       rel="noreferrer"
       className={cn([
-        "relative aspect-video max-w-80 overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm",
+        "relative aspect-video overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm md:max-w-80",
         {
           "group hover:opacity-90": hasTrailer,
         },

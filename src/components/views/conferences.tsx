@@ -2,7 +2,6 @@
 
 import { ConferenceSelect } from "@/@types";
 import ConfernceCard from "@/components/cards/conference";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { api } from "@/trpc/server";
 import { cache, type FC, type HTMLAttributes } from "react";
@@ -37,20 +36,27 @@ const ConferencesView: FC<ConferencesViewProps> = async ({
   );
 
   return (
-    <ScrollArea>
-      <div className={cn(["flex w-full flex-col gap-3", className])} {...props}>
+    <div className="overflow-y-auto">
+      <div
+        className={cn([
+          "flex w-full flex-col gap-3 overflow-hidden",
+          className,
+        ])}
+        {...props}
+      >
         {conferences.map((conference, i) => {
           return (
-            <ConfernceCard
-              key={conference.id}
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
-              {...(conference as any)}
-              isUpNext={i === 0}
-            />
+            <div key={conference.id}>
+              <ConfernceCard
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+                {...(conference as any)}
+                isUpNext={i === 0}
+              />
+            </div>
           );
         })}
       </div>
-    </ScrollArea>
+    </div>
   );
 };
 

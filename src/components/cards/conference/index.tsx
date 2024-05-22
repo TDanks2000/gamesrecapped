@@ -41,7 +41,7 @@ const ConfernceCard: FC<ConfernceCardProps> = ({
   return (
     <a
       className={cn([
-        "relative flex w-full flex-col gap-2 rounded-lg bg-muted p-3",
+        "relative flex w-full flex-col gap-2 overflow-hidden rounded-lg bg-muted p-3",
         {
           "ring-1 ring-destructive/40": isLive,
           "group transition-all hover:bg-muted/80": !!stream,
@@ -53,16 +53,20 @@ const ConfernceCard: FC<ConfernceCardProps> = ({
       key={id}
     >
       <div className="absolute right-1 top-1">
-        {isLive && <Badge variant="destructive">LIVE</Badge>}
+        {isLive && (
+          <Badge variant="destructive" className="text-xs md:text-sm">
+            LIVE
+          </Badge>
+        )}
         {!isLive && isUpNext && <ConferenceUpNext date={start_time} />}
       </div>
 
       <div className="flex items-center gap-2">
-        <h1 className="truncate text-[13px] font-bold">{name}</h1>
+        <h1 className="truncate text-xs font-bold md:text-[13px]">{name}</h1>
       </div>
       <div className="flex items-center gap-2">
-        <CalendarIcon className="size-5 text-muted-foreground" />
-        <h1 className="truncate text-sm">
+        <CalendarIcon className="size-4 text-muted-foreground md:size-5" />
+        <h1 className="truncate text-xs md:text-sm">
           {start_time ? dayjs(start_time).format("DD MMM YYYY hh:mm A") : "TBA"}{" "}
           - {end_time ? dayjs(end_time).format("hh:mm A") : "TBA"}{" "}
           <span className="text-xs text-muted-foreground">estimate</span>
