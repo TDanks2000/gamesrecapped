@@ -43,7 +43,7 @@ const NavBar = () => {
         >
           Home
         </Link>
-        <Link
+        {/* <Link
           href="/faq"
           className={cn([
             "text-muted-foreground transition-colors hover:text-foreground",
@@ -53,7 +53,7 @@ const NavBar = () => {
           ])}
         >
           FAQ
-        </Link>
+        </Link> */}
       </nav>
       <Sheet>
         <SheetTrigger asChild>
@@ -82,7 +82,7 @@ const NavBar = () => {
             >
               Home
             </Link>
-            <Link
+            {/* <Link
               href="/faq"
               className={cn([
                 "text-muted-foreground hover:text-foreground",
@@ -92,7 +92,7 @@ const NavBar = () => {
               ])}
             >
               FAQ
-            </Link>
+            </Link> */}
           </nav>
         </SheetContent>
       </Sheet>
