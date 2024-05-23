@@ -8,26 +8,13 @@ import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 dayjs.extend(localizedFormat);
 
+import { type Game } from "@/@types";
 import UpdateGaneComponent from "@/components/admin/update/game";
 import { Button } from "@/components/ui/button";
 import { getImageFromURL } from "@/lib/utils";
 import type { FC } from "react";
 
-interface TableGamesBodyItemProps {
-  id: number;
-  title: string;
-  isExcusive: boolean;
-  release_date: Date | null;
-  devloper: string[];
-  publisher: string[];
-  media: {
-    id: number;
-    type: string;
-    link: string;
-    isImage: boolean;
-    game_id: number | null;
-  }[];
-}
+type TableGamesBodyItemProps = Game;
 
 const TableGamesBodyItem: FC<TableGamesBodyItemProps> = (game) => {
   const media = game.media?.[0];
@@ -71,7 +58,7 @@ const TableGamesBodyItem: FC<TableGamesBodyItemProps> = (game) => {
       </TableCell>
 
       <TableCell>
-        <UpdateGaneComponent id={game.id}>
+        <UpdateGaneComponent {...game}>
           <Button variant={"ghost"} size={"icon"}>
             <PencilLine className="size-5" />
           </Button>

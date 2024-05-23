@@ -31,3 +31,44 @@ export enum StreamSelect {
   Conference = "Conference",
   conferenceId = "conferenceId",
 }
+
+export interface Game {
+  id: number;
+  title: string;
+  release_date: Date | null;
+  genres: string[];
+  isExcusive: boolean;
+  isGameUpdate: boolean;
+  isDLC: boolean;
+  hasMP: boolean;
+  hasSP: boolean;
+  devloper: string[];
+  publisher: string[];
+  media: Media[];
+  conference: Conference | null;
+}
+
+export interface Conference {
+  id: number;
+  name: string;
+  start_time: Date;
+  end_time: Date;
+  games: Game[];
+  streams: Stream[];
+}
+
+export interface Stream {
+  id: number;
+  title: string;
+  link: string;
+  isLiveNow: boolean;
+  Conference: Conference | null;
+  conferenceId: number | null;
+}
+
+export interface Media {
+  id: number;
+  type: string;
+  link: string;
+  isImage: boolean;
+}

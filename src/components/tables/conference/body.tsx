@@ -12,6 +12,7 @@ const getData = cache(async () => {
       ConferenceSelect.name,
       ConferenceSelect.start_time,
     ],
+    sort: "start_time-asc",
   });
 
   return data;
@@ -27,10 +28,8 @@ const TableConferenceBody = async () => {
           data.map((conference) => (
             <TableConferenceBodyItem
               key={conference.name}
-              id={conference.id}
-              end_date={conference.end_time}
-              name={conference.name}
-              start_date={conference.start_time}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              {...(conference as any)}
             />
           ))
         ) : (

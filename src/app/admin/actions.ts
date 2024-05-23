@@ -31,14 +31,16 @@ export const updateConference = async (
 
 export const updateStream = async (
   id: number,
-  data: Prisma.StreamUpdateInput,
+  data: Prisma.StreamUncheckedUpdateInput,
 ) => {
   const prisma = new PrismaClient();
   const stream = await prisma.stream.update({
     where: {
       id,
     },
-    data,
+    data: {
+      ...data,
+    },
   });
 
   return stream;

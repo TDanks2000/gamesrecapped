@@ -27,6 +27,7 @@ export const conferenceRouter = createTRPCRouter({
         select: z.array(z.nativeEnum(ConferenceSelect).optional()).optional(),
         offset: z.number().optional(),
         limit: z.number().optional(),
+        sort: z.enum(["start_time-asc", "start_time-desc"]).optional(),
       }),
     )
     .query(({ ctx, input }) => {
@@ -45,6 +46,9 @@ export const conferenceRouter = createTRPCRouter({
         select: !Object.values(select).length ? undefined : select,
         skip: input.offset,
         take: input.limit,
+        orderBy: {
+          start_time: input.sort === "start_time-asc" ? "asc" : "desc",
+        },
       });
 
       return data;

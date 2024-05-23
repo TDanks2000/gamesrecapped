@@ -17,7 +17,8 @@ const TableStreamsBody = async () => {
       <TableBody>
         {!!data?.length ? (
           data.map((stream) => (
-            <TableStreamsBodyItem key={stream.title} {...stream} />
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            <TableStreamsBodyItem key={stream.title} {...(stream as any)} />
           ))
         ) : (
           <TableRow>

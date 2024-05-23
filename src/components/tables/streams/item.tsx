@@ -1,32 +1,21 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { TableCell, TableRow } from "@/components/ui/table";
 
-import { MoreHorizontal } from "lucide-react";
+import { PencilLine, Trash2 } from "lucide-react";
 
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 dayjs.extend(localizedFormat);
 
+import { type Stream } from "@/@types";
+import UpdateStreamComponent from "@/components/admin/update/stream";
 import { cn } from "@/lib/utils";
 import type { FC } from "react";
 
-interface TableGamesBodyItemProps {
-  id: number;
-  title: string;
-  link: string;
-  isLiveNow: boolean;
-  conferenceId: number | null;
-}
+type TableStreamsBodyItemProps = Stream;
 
-const TableStreamsBodyItem: FC<TableGamesBodyItemProps> = (stream) => {
+const TableStreamsBodyItem: FC<TableStreamsBodyItemProps> = (stream) => {
   return (
     <TableRow key={stream.title}>
       <TableCell className="hidden aspect-square sm:table-cell"></TableCell>
@@ -59,19 +48,15 @@ const TableStreamsBodyItem: FC<TableGamesBodyItemProps> = (stream) => {
       </TableCell>
 
       <TableCell>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button aria-haspopup="true" size="icon" variant="ghost">
-              <MoreHorizontal className="h-4 w-4" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <UpdateStreamComponent {...stream}>
+          <Button variant={"ghost"} size={"icon"}>
+            <PencilLine className="size-5" />
+          </Button>
+        </UpdateStreamComponent>
+
+        <Button variant={"ghost"} size={"icon"}>
+          <Trash2 className="size-5" />
+        </Button>
       </TableCell>
     </TableRow>
   );

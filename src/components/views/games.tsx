@@ -15,6 +15,7 @@ const getGames = cache(async (sort?: "date-asc" | "date-desc") => {
       GameSelect.release_date,
       GameSelect.devloper,
       GameSelect.publisher,
+      GameSelect.id,
     ],
     sort,
   });
