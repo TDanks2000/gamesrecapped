@@ -16,6 +16,12 @@ const getGames = cache(async (sort?: "date-asc" | "date-desc") => {
       GameSelect.devloper,
       GameSelect.publisher,
       GameSelect.id,
+      GameSelect.isGameUpdate,
+      GameSelect.isDLC,
+      GameSelect.hasMP,
+      GameSelect.hasSP,
+      GameSelect.genres,
+      GameSelect.isExcusive,
     ],
     sort,
   });

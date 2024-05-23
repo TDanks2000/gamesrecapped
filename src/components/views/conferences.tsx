@@ -4,7 +4,10 @@ import { ConferenceSelect } from "@/@types";
 import ConfernceCard from "@/components/cards/conference";
 import { cn } from "@/lib/utils";
 import { api } from "@/trpc/server";
+import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
 import { cache, type FC, type HTMLAttributes } from "react";
+dayjs.extend(isBetween);
 
 const getConferences = cache(async () => {
   const data = await api.conference.all({
@@ -16,7 +19,7 @@ const getConferences = cache(async () => {
       ConferenceSelect.start_time,
       ConferenceSelect.streams,
     ],
-    filter: "upcoming",
+    // filter: "upcoming",
   });
 
   return data;
@@ -32,9 +35,19 @@ const ConferencesView: FC<ConferencesViewProps> = async ({
 
   if (!conferences?.length) return null;
 
-  conferences = conferences.sort(
-    (a, b) => new Date(a.end_time).getTime() - new Date(b.end_time).getTime(),
-  );
+  // put past conferences at the bottom using the start time and end time
+  conferences = conferences.sort((a, b) => {
+    if (dayjs(new Date()).isAfter(a?.end_time ?? a?.end_time)) return 0;
+    if (dayjs(new Date()).isAfter(b?.end_time ?? b?.end_time)) return -1;
+
+    return new Date(a.end_time).getTime() - new Date(b.end_time).getTime();
+  });
+
+  // conferences = conferences.sort(
+  //   (a, b) => {
+  //     return new Date(a.end_time).getTime() - new Date(b.end_time).getTime();
+  //   },
+  // );
 
   return (
     <div className="overflow-y-auto">

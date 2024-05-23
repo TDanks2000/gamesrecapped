@@ -32,11 +32,16 @@ const ConfernceCard: FC<ConfernceCardProps> = ({
   isUpNext,
 }) => {
   const isLive: boolean = dayjs().isBetween(start_time, end_time);
+  const hasAired = dayjs().isAfter(end_time);
 
   // find twitch stream from stream link if not default to first
   const stream =
     streams.find((stream) => stream.link.toLowerCase().includes("twitch")) ??
     streams[0];
+
+  const vod = streams.find((stream) =>
+    stream.title?.toLowerCase()?.includes("vod"),
+  );
 
   return (
     <a
@@ -47,7 +52,7 @@ const ConfernceCard: FC<ConfernceCardProps> = ({
           "group transition-all hover:bg-muted/80": !!stream,
         },
       ])}
-      href={!!stream ? stream.link : undefined}
+      href={!!vod && hasAired ? vod.link : !!stream ? stream.link : undefined}
       target="_blank"
       rel="noreferrer"
       key={id}
@@ -59,6 +64,10 @@ const ConfernceCard: FC<ConfernceCardProps> = ({
           </Badge>
         )}
         {!isLive && isUpNext && <ConferenceUpNext date={start_time} />}
+
+        {hasAired && !isLive && !isUpNext && (
+          <Badge variant="destructive">Aired</Badge>
+        )}
       </div>
 
       <div className="flex items-center gap-2">
