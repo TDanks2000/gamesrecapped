@@ -28,6 +28,7 @@ export const conferenceRouter = createTRPCRouter({
         offset: z.number().optional(),
         limit: z.number().optional(),
         sort: z.enum(["start_time-asc", "start_time-desc"]).optional(),
+        filter: z.enum(["live", "upcoming", "past"]).optional(),
       }),
     )
     .query(({ ctx, input }) => {
@@ -48,6 +49,11 @@ export const conferenceRouter = createTRPCRouter({
         take: input.limit,
         orderBy: {
           start_time: input.sort === "start_time-asc" ? "asc" : "desc",
+        },
+        where: {
+          start_time:
+            input.filter === "upcoming" ? { gt: new Date() } : undefined,
+          end_time: input.filter === "past" ? { lt: new Date() } : undefined,
         },
       });
 

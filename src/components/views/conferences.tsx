@@ -16,6 +16,7 @@ const getConferences = cache(async () => {
       ConferenceSelect.start_time,
       ConferenceSelect.streams,
     ],
+    filter: "upcoming",
   });
 
   return data;
