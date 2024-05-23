@@ -44,7 +44,7 @@ const GameCard: FC<GameCardProps> = ({
   id,
   release_date,
 }) => {
-  const media = medias[0];
+  const media = medias?.find((media) => media.isImage) ?? medias?.[0];
 
   const image = !media
     ? ""

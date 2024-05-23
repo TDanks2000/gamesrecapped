@@ -1,3 +1,8 @@
+import {
+  updateConference,
+  updateGame,
+  updateStream,
+} from "@/app/admin/actions";
 import withAdmin from "@/components/HOC/withAuth";
 import AdminConferenceTab from "@/components/admin/tabs/conference";
 import AdminGamesTab from "@/components/admin/tabs/games";
@@ -112,14 +117,17 @@ async function AdminPage() {
                   <DropdownMenuItem>
                     <Link href="/admin/new/stream">Stream</Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/admin/new/media">Media</Link>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
           </div>
 
-          <AdminGamesTab />
-          <AdminConferenceTab />
-          <AdminStreamsTab />
+          <AdminGamesTab updateGame={updateGame} />
+          <AdminConferenceTab updateConference={updateConference} />
+          <AdminStreamsTab updateStream={updateStream} />
         </Tabs>
       </main>
     </div>

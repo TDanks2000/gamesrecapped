@@ -1,3 +1,4 @@
+import { type updateStream } from "@/app/admin/actions";
 import TableStreams from "@/components/tables/streams";
 import {
   Card,
@@ -9,8 +10,13 @@ import {
 } from "@/components/ui/card";
 import { TabsContent } from "@/components/ui/tabs";
 import { api } from "@/trpc/server";
+import { type FC } from "react";
 
-const AdminStreamsTab = async () => {
+interface AdminStreamsTabProps {
+  updateStream: typeof updateStream;
+}
+
+const AdminStreamsTab: FC<AdminStreamsTabProps> = async () => {
   const total = await api.stream.count();
   const offset = 0;
   const limit = 10;

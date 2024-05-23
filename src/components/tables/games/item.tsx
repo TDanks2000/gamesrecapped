@@ -1,25 +1,20 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { TableCell, TableRow } from "@/components/ui/table";
 
-import { MoreHorizontal } from "lucide-react";
+import { PencilLine, Trash2 } from "lucide-react";
 import Image from "next/image";
 
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 dayjs.extend(localizedFormat);
 
+import UpdateGaneComponent from "@/components/admin/update/game";
+import { Button } from "@/components/ui/button";
 import { getImageFromURL } from "@/lib/utils";
 import type { FC } from "react";
 
 interface TableGamesBodyItemProps {
+  id: number;
   title: string;
   isExcusive: boolean;
   release_date: Date | null;
@@ -76,19 +71,15 @@ const TableGamesBodyItem: FC<TableGamesBodyItemProps> = (game) => {
       </TableCell>
 
       <TableCell>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button aria-haspopup="true" size="icon" variant="ghost">
-              <MoreHorizontal className="h-4 w-4" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <UpdateGaneComponent id={game.id}>
+          <Button variant={"ghost"} size={"icon"}>
+            <PencilLine className="size-5" />
+          </Button>
+        </UpdateGaneComponent>
+
+        <Button variant={"ghost"} size={"icon"}>
+          <Trash2 className="size-5" />
+        </Button>
       </TableCell>
     </TableRow>
   );

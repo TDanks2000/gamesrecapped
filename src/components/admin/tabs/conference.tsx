@@ -1,3 +1,4 @@
+import { type updateConference } from "@/app/admin/actions";
 import TableConference from "@/components/tables/conference";
 import {
   Card,
@@ -9,8 +10,13 @@ import {
 } from "@/components/ui/card";
 import { TabsContent } from "@/components/ui/tabs";
 import { api } from "@/trpc/server";
+import { type FC } from "react";
 
-const AdminConferenceTab = async () => {
+interface AdminConferenceTabProps {
+  updateConference: typeof updateConference;
+}
+
+const AdminConferenceTab: FC<AdminConferenceTabProps> = async () => {
   const total = await api.conference.count();
   const offset = 0;
   const limit = 10;

@@ -117,4 +117,27 @@ export const gameRouter = createTRPCRouter({
     if (games?.length) return games[0];
     return null;
   }),
+  addMedia: publicProcedure
+    .input(
+      z.object({
+        gameId: z.number(),
+        media: z.object({
+          type: z.string(),
+          link: z.string(),
+          isImage: z.boolean(),
+        }),
+      }),
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.db.game.update({
+        where: {
+          id: input.gameId,
+        },
+        data: {
+          media: {
+            create: input.media,
+          },
+        },
+      });
+    }),
 });

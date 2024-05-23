@@ -1,3 +1,4 @@
+import { type updateGame } from "@/app/admin/actions";
 import TableGames from "@/components/tables/games";
 import {
   Card,
@@ -9,8 +10,13 @@ import {
 } from "@/components/ui/card";
 import { TabsContent } from "@/components/ui/tabs";
 import { api } from "@/trpc/server";
+import { type FC } from "react";
 
-const AdminGamesTab = async () => {
+interface AdminGamesTabProps {
+  updateGame: typeof updateGame;
+}
+
+const AdminGamesTab: FC<AdminGamesTabProps> = async () => {
   const total = await api.game.count();
   const offset = 0;
   const limit = 10;
