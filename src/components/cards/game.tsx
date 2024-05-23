@@ -52,9 +52,7 @@ const GameCard: FC<GameCardProps> = ({
       ? media.link
       : getImageFromURL(media.link);
 
-  const trailers = medias.filter((media) =>
-    media.type.toLowerCase().includes("trailer"),
-  );
+  const trailers = medias?.filter((media) => !media?.isImage);
 
   const hasTrailer = trailers.length > 0;
   const trailer = trailers[0];
@@ -116,7 +114,7 @@ const GameCard: FC<GameCardProps> = ({
           </Badge>
           <h3 className="line-clamp-2 text-lg font-semibold">{title}</h3>
           {/* RELEASE DATE */}
-          <p className="text-xs text-muted-foreground">
+          <p className="truncate text-xs text-muted-foreground">
             {release_date ? dayjs(release_date).format("MMMM DD, YYYY") : "TBA"}
           </p>
         </div>
