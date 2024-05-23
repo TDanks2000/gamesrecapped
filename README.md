@@ -8,14 +8,12 @@
 
 ## About
 
-Games Recaped provides the latest updates from game conferences such as E3, SGF, and more. Stay informed on new game announcements, trailers, and exclusive interviews!
+Games Recaped provides the latest updates from game conferences such as E3, SGF, and more. Stay informed on new game announcements, trailers
 
 ## Features
 
 - Latest game conference updates
 - Easy-to-navigate interface
-- Real-time notifications for new announcements
-- Detailed summaries and analysis
 
 ## Installation
 
