@@ -34,7 +34,7 @@ Games Recaped provides the latest updates from game conferences such as E3, SGF,
 
 1. Create a .env file by copying the example file:
    ```bash
-   cp .env.example .env I
+   cp .env.example .env
    ```
 2. Update the .env file with your configuration:
    ```bash
