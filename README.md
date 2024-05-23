@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="#">
-    <img src="http://localhost:3000/logo.png"  style="width: 150px" />
+    <img src="http://gamesrecaped.tdanks.com/logo.png"  style="width: 150px" />
   </a>
 </div>
 
