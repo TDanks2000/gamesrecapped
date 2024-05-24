@@ -5,6 +5,7 @@ import { GeistSans } from "geist/font/sans";
 import { TRPCReactProvider } from "@/trpc/react";
 import { ThemeProvider } from "next-themes";
 
+import Footer from "@/components/footer";
 import NavBar from "@/components/navBar";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -59,6 +60,8 @@ export default function RootLayout({
             <NavBar />
             <TRPCReactProvider>{children}</TRPCReactProvider>
             <Toaster />
+
+            <Footer />
           </TooltipProvider>
         </ThemeProvider>
       </body>
