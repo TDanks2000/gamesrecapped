@@ -25,15 +25,33 @@ const getConferences = cache(async () => {
   return data;
 });
 
-type ConferencesViewProps = HTMLAttributes<HTMLDivElement>;
+interface ConferencesViewProps extends HTMLAttributes<HTMLDivElement> {
+  searchParams?: {
+    search?: string;
+    [key: string]: string | undefined;
+  };
+}
 
 const ConferencesView: FC<ConferencesViewProps> = async ({
   className,
+  searchParams,
   ...props
 }) => {
   let conferences = await getConferences();
 
   if (!conferences?.length) return null;
+
+  if (searchParams?.search) {
+    conferences = conferences?.filter((conference) => {
+      if (!conference) return false;
+      if (!searchParams?.search) return false;
+
+      return conference.name
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .includes(searchParams.search.toLowerCase().replace(/\s+/g, ""));
+    });
+  }
 
   // put past conferences at the bottom using the start time and end time
   conferences = conferences.sort((a, b) => {
@@ -58,17 +76,21 @@ const ConferencesView: FC<ConferencesViewProps> = async ({
         ])}
         {...props}
       >
-        {conferences.map((conference, i) => {
-          return (
-            <div key={conference.id}>
-              <ConfernceCard
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
-                {...(conference as any)}
-                isUpNext={i === 0}
-              />
-            </div>
-          );
-        })}
+        {!!conferences?.length ? (
+          conferences.map((conference, i) => {
+            return (
+              <div key={conference.id}>
+                <ConfernceCard
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+                  {...(conference as any)}
+                  isUpNext={i === 0}
+                />
+              </div>
+            );
+          })
+        ) : (
+          <div className="p-2">Nothing to show</div>
+        )}
       </div>
     </div>
   );

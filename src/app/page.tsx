@@ -7,7 +7,8 @@ import { Suspense } from "react";
 
 type PageProps = {
   searchParams?: {
-    sortGameBy: "date-asc" | "date-desc";
+    sortGameBy?: "date-asc" | "date-desc";
+    search?: string;
     [key: string]: string | undefined;
   };
 };
@@ -40,7 +41,10 @@ export default async function Home({ searchParams }: PageProps) {
           <h1 className="text-center text-lg font-bold">Conferences</h1>
           <Separator className="mb-2" />
           <Suspense fallback={<div>Loading...</div>}>
-            <ConferencesView className="w-full pr-3" />
+            <ConferencesView
+              className="w-full pr-3"
+              searchParams={searchParams}
+            />
           </Suspense>
         </div>
       </div>
