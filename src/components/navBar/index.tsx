@@ -8,6 +8,7 @@ import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Suspense } from "react";
 
 const NavBar = () => {
   const pathname = usePathname().toLowerCase();
@@ -101,7 +102,9 @@ const NavBar = () => {
         </SheetContent>
       </Sheet>
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-        <NavBarSearch />
+        <Suspense fallback={null}>
+          <NavBarSearch />
+        </Suspense>
       </div>
     </header>
   );
