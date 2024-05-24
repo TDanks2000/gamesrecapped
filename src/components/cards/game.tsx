@@ -102,7 +102,7 @@ const GameCard: FC<GameCardProps> = ({
                       : hasMP && hasSP
                         ? "SP/MP"
                         : hasMP
-                          ? "Mmultiplayer"
+                          ? "Multiplayer"
                           : "Singleplayer"}
               </p>
             </Badge>
@@ -112,7 +112,7 @@ const GameCard: FC<GameCardProps> = ({
           <Badge variant={"secondary"} className="max-w-full">
             <p className="truncate text-[10px]">{conference?.name}</p>
           </Badge>
-          <h3 className="line-clamp-2 text-lg font-semibold">{title}</h3>
+          <h3 className="line-clamp-2 text-sm font-semibold">{title}</h3>
           {/* RELEASE DATE */}
           <p className="truncate text-xs text-muted-foreground">
             {release_date ? dayjs(release_date).format("MMMM DD, YYYY") : "TBA"}

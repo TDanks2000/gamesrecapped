@@ -348,6 +348,10 @@ const AdminNewGameForm = () => {
                     type="text"
                     onChange={(e) => {
                       e.target.value = e.target.value.replace("https://", "");
+                      e.target.value = e.target.value.replace(
+                        "www.youtube.com/watch?v=",
+                        "www.youtube.com/embed/",
+                      );
                       onChange(e);
                     }}
                     {...field}

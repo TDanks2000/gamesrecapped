@@ -7,7 +7,7 @@ import { Suspense } from "react";
 
 type PageProps = {
   searchParams?: {
-    sort: "date-asc" | "date-desc";
+    sortGameBy: "date-asc" | "date-desc";
     [key: string]: string | undefined;
   };
 };

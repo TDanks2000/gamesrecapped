@@ -74,8 +74,7 @@ export const gameRouter = createTRPCRouter({
         skip: input.offset,
         take: input.limit,
         orderBy: {
-          release_date:
-            input.sort && input.sort === "date-asc" ? "asc" : "desc",
+          release_date: input.sort === "date-asc" ? "asc" : "desc",
         },
       });
 

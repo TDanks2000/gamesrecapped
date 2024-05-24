@@ -6,6 +6,7 @@ import { api } from "@/trpc/server";
 import { cache, type FC } from "react";
 
 const getGames = cache(async (sort?: "date-asc" | "date-desc") => {
+  console.log(sort);
   const data = await api.game.all({
     select: [
       GameSelect.title,
@@ -31,13 +32,13 @@ const getGames = cache(async (sort?: "date-asc" | "date-desc") => {
 
 interface GamesViewProps {
   searchParams?: {
-    sort: "date-asc" | "date-desc";
+    sortGameBy: "date-asc" | "date-desc";
     [key: string]: string | undefined;
   };
 }
 
 const GamesView: FC<GamesViewProps> = async ({ searchParams }) => {
-  const games = await getGames(searchParams?.sort);
+  const games = await getGames(searchParams?.sortGameBy);
 
   if (!games) return null;
 
