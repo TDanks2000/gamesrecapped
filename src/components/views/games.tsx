@@ -6,7 +6,6 @@ import { api } from "@/trpc/server";
 import { cache, type FC } from "react";
 
 const getGames = cache(async (sort?: "date-asc" | "date-desc") => {
-  console.log(sort);
   const data = await api.game.all({
     select: [
       GameSelect.title,
