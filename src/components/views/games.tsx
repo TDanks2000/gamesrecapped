@@ -61,7 +61,7 @@ const GamesView: FC<GamesViewProps> = async ({ searchParams }) => {
   if (!games) return null;
 
   return (
-    <div className="grid w-full grid-cols-1 gap-4 overflow-hidden md:grid-cols-3">
+    <div className="grid w-full grid-cols-1 gap-4 overflow-hidden md:grid-cols-3 lg:grid-cols-4">
       {!!games?.length ? (
         games.map((game) => (
           <GameCard

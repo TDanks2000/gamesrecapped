@@ -89,8 +89,7 @@ const GameCard: FC<GameCardProps> = ({
       {/* Content */}
       <div className="relative z-10 flex size-full flex-col justify-between">
         <div className="flex justify-between px-3 py-2">
-          <div></div>
-          <div>
+          <div className="absolute right-0 top-0 p-1">
             <Badge variant={"secondary"}>
               <p className="truncate">
                 {isGameUpdate
