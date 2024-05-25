@@ -34,6 +34,7 @@ const formSchema = z.object({
     .min(1, "Title must be at least 1 character")
     .max(255, "Title must be less than 255 characters"),
   release_date: z.date().optional(),
+  conferenceId: z.string(),
   isExcusive: z.boolean(),
   isGameUpdate: z.boolean(),
   isDLC: z.boolean(),
@@ -105,6 +106,7 @@ const AdminNewGameForm = () => {
         genres: genres,
         publisher: publisher,
         media: values.media,
+        conferenceId: parseInt(values.conferenceId),
       });
 
       form.reset();
@@ -169,6 +171,24 @@ const AdminNewGameForm = () => {
                     />
                   </PopoverContent>
                 </Popover>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="conferenceId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Conference Id</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="The conference id, the game was announced at."
+                  type="number"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

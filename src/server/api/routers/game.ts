@@ -20,6 +20,7 @@ export const gameRouter = createTRPCRouter({
         genres: z.array(z.string()).optional(),
         devloper: z.array(z.string()).optional(),
         publisher: z.array(z.string()).optional(),
+        conferenceId: z.number(),
         media: z.object({
           type: z.string(),
           link: z.string(),
@@ -42,7 +43,7 @@ export const gameRouter = createTRPCRouter({
           media: {
             create: input.media,
           },
-          conference: {},
+          conference_id: input.conferenceId,
         },
       });
     }),
