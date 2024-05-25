@@ -1,5 +1,6 @@
 "use client";
 
+import { type SortByForGame } from "@/@types";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -15,13 +16,13 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState, type FC } from "react";
 
 const HomeDropdown: FC = () => {
-  const [sortGamesBy, setSortGamesBy] = useState<"date-asc" | "date-desc">();
+  const [sortGamesBy, setSortGamesBy] = useState<SortByForGame>("newest");
   const router = useRouter();
   const pathname = usePathname();
   const search = useSearchParams();
 
   const onSelect = useCallback(
-    (sortBy: "date-asc" | "date-desc") => {
+    (sortBy: SortByForGame) => {
       const params = new URLSearchParams(search.toString());
       params.set("sortGameBy", sortBy);
 
@@ -38,8 +39,10 @@ const HomeDropdown: FC = () => {
           <ArrowDownNarrowWide
             className={cn([
               "size-3.5 transition-all",
-              sortGamesBy === "date-asc" && "rotate-180",
-              sortGamesBy === "date-desc" && "rotate-0",
+              !!(sortGamesBy === "date-asc" || sortGamesBy === "newest") &&
+                "rotate-180",
+              !!(sortGamesBy === "date-desc" || sortGamesBy === "oldest") &&
+                "rotate-0",
             ])}
           />
           <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
@@ -52,7 +55,21 @@ const HomeDropdown: FC = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuCheckboxItem
-          checked={sortGamesBy === "date-desc" || !sortGamesBy}
+          checked={sortGamesBy === "newest"}
+          onSelect={() => onSelect("newest")}
+        >
+          Newest
+        </DropdownMenuCheckboxItem>
+
+        <DropdownMenuCheckboxItem
+          checked={sortGamesBy === "oldest"}
+          onSelect={() => onSelect("oldest")}
+        >
+          Oldest
+        </DropdownMenuCheckboxItem>
+
+        <DropdownMenuCheckboxItem
+          checked={sortGamesBy === "date-desc"}
           onSelect={() => onSelect("date-desc")}
         >
           Date (newest first)

@@ -72,3 +72,5 @@ export interface Media {
   link: string;
   isImage: boolean;
 }
+
+export type SortByForGame = "date-desc" | "date-asc" | "newest" | "oldest";
