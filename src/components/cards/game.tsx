@@ -107,7 +107,7 @@ const GameCard: FC<GameCardProps> = ({
             </Badge>
           </div>
         </div>
-        <div className="flex flex-1 flex-col items-start justify-end gap-1 p-4 py-5">
+        <div className="flex size-full flex-1 flex-col items-start justify-end gap-0.5 p-3">
           <Badge variant={"secondary"} className="max-w-full">
             <p className="truncate text-[10px]">{conference?.name}</p>
           </Badge>
