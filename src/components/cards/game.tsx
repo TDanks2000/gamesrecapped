@@ -87,7 +87,7 @@ const GameCard: FC<GameCardProps> = ({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex size-full flex-col justify-between">
+      <div className="relative z-10 flex size-full w-full flex-col justify-between">
         <div className="flex justify-between px-3 py-2">
           <div className="absolute right-0 top-0 p-1">
             <Badge variant={"secondary"}>
@@ -107,7 +107,7 @@ const GameCard: FC<GameCardProps> = ({
             </Badge>
           </div>
         </div>
-        <div className="flex flex-col items-start gap-0.5 p-4 py-5">
+        <div className="flex flex-1 flex-col items-start justify-end gap-1 p-4 py-5">
           <Badge variant={"secondary"} className="max-w-full">
             <p className="truncate text-[10px]">{conference?.name}</p>
           </Badge>
