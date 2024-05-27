@@ -10,6 +10,7 @@ import NavBar from "@/components/navBar";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "@/styles/globals.css";
+import Script from "next/script";
 import NextTopLoader from "nextjs-toploader";
 
 export const metadata = {
@@ -37,7 +38,13 @@ export default function RootLayout({
         />
         <meta property="og:image" content="/android-chrome-192x192.png" />
         <meta property="og:image:type" content="image/png" />
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="b31ac805-911c-4f85-bf0c-c68814b13e15"
+        />
       </head>
+
       <body>
         <NextTopLoader
           color="#8700ed"
