@@ -39,7 +39,7 @@ const ConferenceUpNext: FC<ConferenceUpNextProps> = ({ date }) => {
   };
 
   return (
-    <Badge variant="default" className="text-xs md:text-sm">
+    <Badge variant="default" className="px-1 py-0.5 text-xs font-medium">
       {!countdown ? "Next Up" : countdownView()}
     </Badge>
   );

@@ -25,8 +25,8 @@ const NavBar = () => {
           <Image
             src={"/logo.png"}
             alt="Games Recaped Logo"
-            width={100}
-            height={100}
+            width={50}
+            height={50}
             className="size-14 object-contain"
           />
           <span className="sr-only">Games Recaped</span>
@@ -70,8 +70,8 @@ const NavBar = () => {
               <Image
                 src={"/logo.png"}
                 alt="Games Recaped Logo"
-                width={100}
-                height={100}
+                width={50}
+                height={50}
                 className="size-12 object-contain"
               />
               <span className="sr-only">Games Recaped</span>
