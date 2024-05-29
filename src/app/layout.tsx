@@ -42,8 +42,8 @@ export default function RootLayout({
           property="og:description"
           content="Discover the ultimate roundup of Summer Game Fest and beyond, featuring trailers, demos, gameplay highlights, livestreams, and exclusive announcements. Stay ahead in the gaming universe with our comprehensive recap, bringing you the latest updates, insights, and reveals from the gaming industry's hottest events."
         />
-        <meta property="og:image" content="/android-chrome-192x192.png" />
-        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image" content="/social-large.webp" />
+        <meta property="og:image:type" content="image/webp" />
         <meta name="author" content="Tommy Danks" />
         <meta name="language" content="English" />
 
@@ -59,6 +59,7 @@ export default function RootLayout({
           Discover the ultimate roundup of Summer Game Fest and beyond, featuring trailers, demos, gameplay highlights, livestreams, and exclusive announcements. Stay ahead in the gaming universe with our comprehensive recap, bringing you the latest updates, insights, and reveals from the gaming industry's hottest events
           "
         />
+        <meta name="twitter:image" content="/social-large.webp" />
 
         <Script
           defer
