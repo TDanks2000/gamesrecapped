@@ -1,5 +1,6 @@
 "use client";
 
+import { ModeToggle } from "@/components/mode-toggle";
 import NavBarSearch from "@/components/navBar/search";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -105,6 +106,8 @@ const NavBar = () => {
         <Suspense fallback={null}>
           <NavBarSearch />
         </Suspense>
+
+        <ModeToggle />
       </div>
     </header>
   );
