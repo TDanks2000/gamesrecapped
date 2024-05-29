@@ -14,8 +14,10 @@ import Script from "next/script";
 import NextTopLoader from "nextjs-toploader";
 
 export const metadata = {
-  title: "Games Recaped",
-  description: "Get the latest conference updates!",
+  title:
+    "Games Recapped | Ultimate Summer Game Fest Recap | Trailers, Livestreams & More",
+  description:
+    "Discover the ultimate roundup of Summer Game Fest and beyond, featuring trailers, demos, gameplay highlights, livestreams, and exclusive announcements. Stay ahead in the gaming universe with our comprehensive recap, bringing you the latest updates, insights, and reveals from the gaming industry's hottest events",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -31,13 +33,33 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <meta property="og:title" content="Games Recaped" />
+        <meta property="og:title" content="Games Recapped" />
+        <meta
+          name="keywords"
+          content="summer game fest, gaming, trailers, demos, gameplay, livestreams, announcements, gaming industry"
+        />
         <meta
           property="og:description"
-          content="Get the latest conference updates"
+          content="Discover the ultimate roundup of Summer Game Fest and beyond, featuring trailers, demos, gameplay highlights, livestreams, and exclusive announcements. Stay ahead in the gaming universe with our comprehensive recap, bringing you the latest updates, insights, and reveals from the gaming industry's hottest events."
         />
         <meta property="og:image" content="/android-chrome-192x192.png" />
         <meta property="og:image:type" content="image/png" />
+        <meta name="author" content="Tommy Danks" />
+        <meta name="language" content="English" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Games Recap - Your Source for Gaming News from Summer Game Fest and Beyond"
+        />
+        <meta
+          name="twitter:description"
+          content="
+          Discover the ultimate roundup of Summer Game Fest and beyond, featuring trailers, demos, gameplay highlights, livestreams, and exclusive announcements. Stay ahead in the gaming universe with our comprehensive recap, bringing you the latest updates, insights, and reveals from the gaming industry's hottest events
+          "
+        />
+
         <Script
           defer
           src="https://cloud.umami.is/script.js"
