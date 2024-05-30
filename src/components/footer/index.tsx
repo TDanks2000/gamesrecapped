@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { FaGithub, FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   const pathname = usePathname().toLowerCase();
@@ -8,27 +9,33 @@ const Footer = () => {
   if (pathname.includes("/admin")) return null;
 
   return (
-    <div className="mt-5 flex flex-col gap-1 bg-muted/40 p-2 text-center">
-      <p className="flex items-center justify-center gap-1 text-sm">
-        Made with ❤️ by
-        <a
-          href="https://github.com/tdanks2000"
-          target="_blank"
-          className="transition-all hover:underline"
-        >
-          Tommy
-        </a>
-      </p>
+    <div className="mt-5 flex flex-col  items-center justify-between gap-5 bg-muted/40 p-5 px-14 text-center sm:flex-row sm:gap-1 sm:text-left">
+      <div className="flex flex-col gap-1">
+        <p className="text-sm font-medium">
+          © {new Date().getFullYear()} Games Recaped
+        </p>
+        <p className="text-sm text-muted-foreground">
+          Not affliated with summer games fest, or any other games conference
+        </p>
+      </div>
 
-      <a
-        href="https://github.com/tdanks2000/gamesrecaped"
-        className="text-m ml-4 text-sm hover:underline"
-      >
-        Github Repo
-      </a>
-      <p className="text-sm text-muted-foreground">
-        Not affliated with summer games fest, or any other games conference
-      </p>
+      <div className="flex flex-row gap-3">
+        <a
+          className="size-5 transition-all hover:opacity-50"
+          target="_blank"
+          href="https://github.com/tdanks2000/gamesrecaped"
+        >
+          <FaGithub className="size-full" />
+        </a>
+
+        <a
+          href="https://x.com/gamesrecapped"
+          target="_blank"
+          className="size-5 transition-all hover:opacity-50"
+        >
+          <FaXTwitter className="size-full" />
+        </a>
+      </div>
     </div>
   );
 };

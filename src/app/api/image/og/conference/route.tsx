@@ -12,9 +12,7 @@ dayjs.extend(advanced);
 
 import { type NextRequest } from "next/server";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -33,6 +31,7 @@ export async function GET(request: NextRequest) {
 
   const color = "#7d5fff";
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const titleLength = 80;
 
   const cover =
@@ -65,6 +64,7 @@ export async function GET(request: NextRequest) {
               display: "flex",
             }}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={cover}
               width={1200}
