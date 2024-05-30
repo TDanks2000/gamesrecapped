@@ -1,35 +1,9 @@
 "use server";
 
-import { GameSelect, type Game } from "@/@types";
+import { type Game } from "@/@types";
 import GameCard from "@/components/cards/game";
-import { api } from "@/trpc/server";
-import { cache, type FC } from "react";
-
-const getGames = cache(
-  async (sort?: "date-asc" | "date-desc" | "newest" | "oldest") => {
-    const data = await api.game.all({
-      select: [
-        GameSelect.title,
-        GameSelect.conference,
-        GameSelect.media,
-        GameSelect.isExcusive,
-        GameSelect.release_date,
-        GameSelect.devloper,
-        GameSelect.publisher,
-        GameSelect.id,
-        GameSelect.isGameUpdate,
-        GameSelect.isDLC,
-        GameSelect.hasMP,
-        GameSelect.hasSP,
-        GameSelect.genres,
-        GameSelect.isExcusive,
-      ],
-      sort,
-    });
-
-    return data;
-  },
-);
+import { getGames } from "@/lib/fetchers";
+import { type FC } from "react";
 
 interface GamesViewProps {
   searchParams?: {

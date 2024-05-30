@@ -1,29 +1,12 @@
 "use server";
 
-import { ConferenceSelect } from "@/@types";
 import ConfernceCard from "@/components/cards/conference";
+import { getConferences } from "@/lib/fetchers";
 import { cn } from "@/lib/utils";
-import { api } from "@/trpc/server";
 import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
-import { cache, type FC, type HTMLAttributes } from "react";
+import { type FC, type HTMLAttributes } from "react";
 dayjs.extend(isBetween);
-
-const getConferences = cache(async () => {
-  const data = await api.conference.all({
-    select: [
-      ConferenceSelect.end_time,
-      ConferenceSelect.id,
-      ConferenceSelect.name,
-      ConferenceSelect.end_time,
-      ConferenceSelect.start_time,
-      ConferenceSelect.streams,
-    ],
-    // filter: "upcoming",
-  });
-
-  return data;
-});
 
 interface ConferencesViewProps extends HTMLAttributes<HTMLDivElement> {
   searchParams?: {

@@ -77,4 +77,17 @@ export const conferenceRouter = createTRPCRouter({
         },
       });
     }),
+  get: publicProcedure
+    .input(
+      z.object({
+        id: z.number(),
+      }),
+    )
+    .query(({ ctx, input }) => {
+      return ctx.db.conference.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+    }),
 });

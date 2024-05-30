@@ -1,16 +1,9 @@
 import TableStreamsBodyItem from "@/components/tables/streams/item";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { api } from "@/trpc/server";
-import { cache } from "react";
-
-const getData = cache(async () => {
-  const data = await api.stream.all({});
-
-  return data;
-});
+import { getStreams } from "@/lib/fetchers";
 
 const TableStreamsBody = async () => {
-  const data = await getData();
+  const data = await getStreams();
 
   return (
     <>

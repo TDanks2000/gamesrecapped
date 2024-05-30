@@ -1,25 +1,9 @@
-import { ConferenceSelect } from "@/@types";
 import TableConferenceBodyItem from "@/components/tables/conference/item";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { api } from "@/trpc/server";
-import { cache } from "react";
-
-const getData = cache(async () => {
-  const data = await api.conference.all({
-    select: [
-      ConferenceSelect.id,
-      ConferenceSelect.end_time,
-      ConferenceSelect.name,
-      ConferenceSelect.start_time,
-    ],
-    sort: "start_time-asc",
-  });
-
-  return data;
-});
+import { getConferences } from "@/lib/fetchers";
 
 const TableConferenceBody = async () => {
-  const data = await getData();
+  const data = await getConferences();
 
   return (
     <>

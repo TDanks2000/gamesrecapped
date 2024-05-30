@@ -1,12 +1,7 @@
-import { api } from "@/trpc/server";
+import { isAuth } from "@/lib/fetchers";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { cache, type ComponentType, type FC } from "react";
-
-const isAuth = cache(async (token: string) => {
-  const isAuth = await api.admin.check({ password: token });
-  return isAuth;
-});
+import { type ComponentType, type FC } from "react";
 
 const withAdmin = <P extends object>(WrappedComponent: ComponentType<P>) => {
   const Wrapper: FC<P> = async (props) => {
