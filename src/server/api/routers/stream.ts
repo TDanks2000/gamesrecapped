@@ -64,4 +64,18 @@ export const streamRouter = createTRPCRouter({
         },
       });
     }),
+
+  get: publicProcedure
+    .input(
+      z.object({
+        id: z.number(),
+      }),
+    )
+    .query(({ ctx, input }) => {
+      return ctx.db.stream.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+    }),
 });

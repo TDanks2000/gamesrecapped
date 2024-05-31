@@ -56,7 +56,24 @@ export const getStreams = cache(async () => {
   return data;
 });
 
-export const getConference = cache(async (id: number) => {
-  const data = await api.conference.get({ id });
+export const getConference = cache(
+  async (id: number | string, select?: Array<ConferenceSelect>) => {
+    if (typeof id === "string") id = parseInt(id);
+    const data = await api.conference.get({ id, select });
+    return data;
+  },
+);
+
+export const getStream = cache(async (id: number | string) => {
+  if (typeof id === "string") id = parseInt(id);
+  const data = await api.stream.get({ id });
   return data;
 });
+
+export const getGame = cache(
+  async (id: number | string, select?: Array<GameSelect>) => {
+    if (typeof id === "string") id = parseInt(id);
+    const data = await api.game.get({ id, select });
+    return data;
+  },
+);

@@ -43,6 +43,8 @@ const ConfernceCard: FC<ConfernceCardProps> = ({
     stream.title?.toLowerCase()?.includes("vod"),
   );
 
+  const redirectLink = `/redirect/stream/${id}/${encodeURIComponent(name.toLowerCase())}`;
+
   return (
     <a
       className={cn([
@@ -52,7 +54,7 @@ const ConfernceCard: FC<ConfernceCardProps> = ({
           "group transition-all hover:bg-muted/80": !!stream,
         },
       ])}
-      href={!!vod && hasAired ? vod.link : !!stream ? stream.link : undefined}
+      href={redirectLink}
       target="_blank"
       rel="noreferrer"
       key={id}

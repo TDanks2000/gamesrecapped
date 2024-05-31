@@ -55,15 +55,12 @@ const GameCard: FC<GameCardProps> = ({
   const trailers = medias?.filter((media) => !media?.isImage);
 
   const hasTrailer = trailers.length > 0;
-  const trailer = trailers[0];
 
-  const trailerLink = trailer?.link.toLowerCase().includes("youtube")
-    ? trailer.link.replace("embed/", "watch?v=")
-    : trailer?.link;
+  const redirectLink = `/redirect/trailer/${id}/${encodeURIComponent(title.toLowerCase())}`;
 
   return (
     <a
-      href={trailerLink ?? "#"}
+      href={redirectLink ?? "#"}
       target="_blank"
       rel="noreferrer"
       className={cn([

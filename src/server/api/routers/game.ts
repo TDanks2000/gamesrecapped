@@ -153,4 +153,32 @@ export const gameRouter = createTRPCRouter({
         },
       });
     }),
+  get: publicProcedure
+    .input(
+      z.object({
+        id: z.number(),
+        select: z.array(z.nativeEnum(GameSelect).optional()).optional(),
+      }),
+    )
+    .query(({ ctx, input }) => {
+      const select: {
+        [key in GameSelect]?: true;
+      } = {
+        media: true,
+      };
+
+      if (input.select) {
+        for (const item of input.select) {
+          if (!item) continue;
+          select[item] = true;
+        }
+      }
+
+      return ctx.db.game.findUnique({
+        select: !Object.values(select).length ? undefined : select,
+        where: {
+          id: input.id,
+        },
+      });
+    }),
 });

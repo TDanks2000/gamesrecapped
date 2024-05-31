@@ -81,13 +81,26 @@ export const conferenceRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.number(),
+        select: z.array(z.nativeEnum(ConferenceSelect).optional()).optional(),
       }),
     )
     .query(({ ctx, input }) => {
+      const select: {
+        [key in ConferenceSelect]?: true;
+      } = {};
+
+      if (input.select) {
+        for (const item of input.select) {
+          if (!item) continue;
+          select[item] = true;
+        }
+      }
+
       return ctx.db.conference.findUnique({
         where: {
           id: input.id,
         },
+        select: !Object.values(select).length ? undefined : select,
       });
     }),
 });
