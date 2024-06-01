@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /redirect
+Disallow: /redirect*
+Disallow: /admin
+Disallow: /admin*
+
+Allow: /
+
+Sitemap: https://recap.games/sitemap.xml

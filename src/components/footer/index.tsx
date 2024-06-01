@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { FaGithub, FaXTwitter } from "react-icons/fa6";
+import { SiKofi } from "react-icons/si";
 
 const Footer = () => {
   const pathname = usePathname().toLowerCase();
@@ -34,6 +35,14 @@ const Footer = () => {
           className="size-5 transition-all hover:opacity-50"
         >
           <FaXTwitter className="size-full" />
+        </a>
+
+        <a
+          href="https://ko-fi.com/tdanks2000"
+          target="_blank"
+          className="size-5 transition-all hover:opacity-50"
+        >
+          <SiKofi className="size-full" />
         </a>
       </div>
     </div>
