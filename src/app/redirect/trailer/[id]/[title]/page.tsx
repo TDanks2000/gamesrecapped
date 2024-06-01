@@ -1,5 +1,4 @@
-import { GameSelect, type Game } from "@/@types";
-import { getGame } from "@/lib/fetchers";
+import { getMedia } from "@/lib/fetchers";
 import { redirect } from "next/navigation";
 
 interface Props {
@@ -7,23 +6,13 @@ interface Props {
 }
 
 const RedirectStreamPage = async ({ params: { id } }: Props) => {
-  const data = await getGame(id, [GameSelect.conference, GameSelect.media]);
+  const data = await getMedia(id);
 
-  const { media: medias } = data as unknown as Game;
+  if (!data?.link) redirect("/not-found");
+  const trailerLink = data?.link.toLowerCase().includes("youtube")
+    ? data.link.replace("embed/", "watch?v=")
+    : data?.link;
 
-  const media = medias?.find((media) => media.isImage) ?? medias?.[0];
-
-  if (!media) redirect("/not-found");
-
-  const trailers = medias?.filter((media) => !media?.isImage);
-
-  const trailer = trailers[0];
-
-  const trailerLink = trailer?.link.toLowerCase().includes("youtube")
-    ? trailer.link.replace("embed/", "watch?v=")
-    : trailer?.link;
-
-  if (!trailerLink) redirect("/not-found");
   redirect(trailerLink);
 };
 

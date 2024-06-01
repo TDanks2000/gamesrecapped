@@ -103,4 +103,17 @@ export const conferenceRouter = createTRPCRouter({
         select: !Object.values(select).length ? undefined : select,
       });
     }),
+  getMedia: publicProcedure
+    .input(
+      z.object({
+        id: z.number(),
+      }),
+    )
+    .query(({ ctx, input }) => {
+      return ctx.db.media.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+    }),
 });

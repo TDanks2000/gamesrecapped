@@ -1,68 +1,62 @@
-import { Badge } from "@/components/ui/badge";
-import { cn, getImageFromURL } from "@/lib/utils";
-import dayjs from "dayjs";
-import { default as Image } from "next/image";
+import { type Game } from "@/@types";
+import GameCardInside from "@/components/cards/game/inside";
+import { buttonVariants } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 import type { FC } from "react";
 
-interface GameCardProps {
-  media: {
-    id: number;
-    type: string;
-    link: string;
-    isImage: boolean;
-  }[];
-  conference?: {
-    name: string;
-    start_date: Date | null;
-    end_date: Date | null;
-  };
-  id: number;
-  title: string;
-  release_date: Date | null;
-  genres: string[];
-  isExcusive: boolean;
-  isGameUpdate: boolean;
-  isDLC: boolean;
-  hasMP: boolean;
-  hasSP: boolean;
-  devloper: string[];
-  publisher: string[];
-  conference_id: number | null;
-  createdAt: Date;
-  updatedAt: Date;
-}
+type GameCardProps = Game;
 
-const GameCard: FC<GameCardProps> = ({
-  media: medias,
-  title,
-  conference,
-  isDLC,
-  isGameUpdate,
-  isExcusive,
-  hasMP,
-  hasSP,
-  id,
-  release_date,
-}) => {
-  const media = medias?.find((media) => media.isImage) ?? medias?.[0];
-
-  const image = !media
-    ? ""
-    : media.isImage
-      ? media.link
-      : getImageFromURL(media.link);
+const GameCard: FC<GameCardProps> = (game) => {
+  const { media: medias, title, id } = game;
 
   const trailers = medias?.filter((media) => !media?.isImage);
 
   const hasTrailer = trailers.length > 0;
+  const hasMoreThanOneTrailer = trailers.length > 1;
 
-  const redirectLink = `/redirect/trailer/${id}/${encodeURIComponent(title.toLowerCase())}`;
+  const redirectLink = (trailerId: number, type: string) =>
+    `/redirect/trailer/${trailerId}/${encodeURIComponent(type.toLowerCase())}`;
+
+  if (hasMoreThanOneTrailer)
+    return (
+      <Popover>
+        <PopoverTrigger asChild>
+          <GameCardInside {...game} hasTrailer={hasTrailer} />
+        </PopoverTrigger>
+
+        <PopoverContent className="w-auto max-w-52 p-0" align="start">
+          <div className="flex w-full flex-col gap-1 overflow-hidden bg-opacity-5">
+            {trailers.map((trailer) => (
+              <a
+                key={trailer.id}
+                href={redirectLink(trailer.id, title)}
+                target="_blank"
+                className={buttonVariants({
+                  variant: "secondary",
+                  size: "sm",
+                  className: "w-full rounded-none",
+                })}
+              >
+                <p className="truncate capitalize">{trailer.type}</p>
+              </a>
+            ))}
+          </div>
+        </PopoverContent>
+      </Popover>
+    );
+
+  if (!hasTrailer) return <GameCardInside {...game} hasTrailer={hasTrailer} />;
+  const trailer = trailers[0]!;
 
   return (
     <a
-      href={redirectLink ?? "#"}
+      href={redirectLink(trailer.id, title) ?? "#"}
       target="_blank"
-      rel="noreferrer"
       className={cn([
         "relative aspect-video overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm md:max-w-80",
         {
@@ -71,50 +65,7 @@ const GameCard: FC<GameCardProps> = ({
       ])}
       key={id}
     >
-      {/* BG */}
-      <div className="absolute inset-0 z-0 h-full w-full">
-        <Image
-          className="size-full object-cover transition-all ease-linear group-hover:-rotate-1 group-hover:scale-[1.01]"
-          src={image ?? ""}
-          alt="Game"
-          width={150}
-          height={150}
-        />
-        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-background to-transparent opacity-95" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 flex size-full w-full flex-col justify-between">
-        <div className="flex justify-between px-3 py-2">
-          <div className="absolute right-0 top-0 p-1">
-            <Badge variant={"secondary"}>
-              <p className="truncate">
-                {isGameUpdate
-                  ? "Game Update"
-                  : isDLC
-                    ? "DLC"
-                    : isExcusive
-                      ? "Excusive"
-                      : hasMP && hasSP
-                        ? "SP/MP"
-                        : hasMP
-                          ? "Multiplayer"
-                          : "Singleplayer"}
-              </p>
-            </Badge>
-          </div>
-        </div>
-        <div className="flex size-full flex-1 flex-col items-start justify-end gap-0.5 p-3">
-          <Badge variant={"secondary"} className="max-w-full">
-            <p className="truncate text-[10px]">{conference?.name}</p>
-          </Badge>
-          <h3 className="line-clamp-2 text-sm font-semibold">{title}</h3>
-          {/* RELEASE DATE */}
-          <p className="truncate text-xs text-muted-foreground">
-            {release_date ? dayjs(release_date).format("MMMM DD, YYYY") : "TBA"}
-          </p>
-        </div>
-      </div>
+      <GameCardInside {...game} hasTrailer={hasTrailer} />
     </a>
   );
 };

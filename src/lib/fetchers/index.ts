@@ -77,3 +77,9 @@ export const getGame = cache(
     return data;
   },
 );
+
+export const getMedia = cache(async (id: number | string) => {
+  if (typeof id === "string") id = parseInt(id);
+  const data = await api.conference.getMedia({ id });
+  return data;
+});
