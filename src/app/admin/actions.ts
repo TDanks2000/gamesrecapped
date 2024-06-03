@@ -1,6 +1,9 @@
 "use server";
 
+import { api } from "@/trpc/server";
 import { PrismaClient, type Prisma } from "@prisma/client";
+import { cookies } from "next/headers";
+import { cache } from "react";
 
 export const updateGame = async (id: number, data: Prisma.GameUpdateInput) => {
   const prisma = new PrismaClient();
@@ -45,3 +48,12 @@ export const updateStream = async (
 
   return stream;
 };
+
+export const isAuth = cache(async () => {
+  let token = cookies().get("pwd")?.value ?? null;
+  if (!token) return false;
+
+  token = decodeURI(token);
+
+  return await api.admin.check({ password: token });
+});

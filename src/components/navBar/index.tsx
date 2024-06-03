@@ -1,17 +1,19 @@
 "use client";
 
 import { ModeToggle } from "@/components/mode-toggle";
+import AdminLink from "@/components/navBar/adminLink";
+import NormalLink from "@/components/navBar/items/link/normal";
 import NavBarSearch from "@/components/navBar/search";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, type FC } from "react";
+import MobileLink from "./items/link/mobile";
 
-const NavBar = () => {
+const NavBar: FC = () => {
   const pathname = usePathname().toLowerCase();
 
   if (pathname.startsWith("/admin")) return null;
@@ -32,17 +34,12 @@ const NavBar = () => {
           />
           <span className="sr-only">Games Recaped</span>
         </Link>
-        <Link
-          href="/"
-          className={cn([
-            "text-muted-foreground transition-colors hover:text-foreground",
-            {
-              "text-foreground": pathname === "/",
-            },
-          ])}
-        >
-          Home
-        </Link>
+
+        <NormalLink title="Home" href="/" pathname={pathname} />
+
+        <Suspense>
+          <AdminLink pathname={pathname} />
+        </Suspense>
         {/* <Link
           href="/faq"
           className={cn([
@@ -77,17 +74,11 @@ const NavBar = () => {
               />
               <span className="sr-only">Games Recaped</span>
             </Link>
-            <Link
-              href="/"
-              className={cn([
-                "text-muted-foreground hover:text-foreground",
-                {
-                  "text-foreground": pathname === "/",
-                },
-              ])}
-            >
-              Home
-            </Link>
+            <MobileLink title="Home" href="/" pathname={pathname} />
+
+            <Suspense>
+              <AdminLink pathname={pathname} />
+            </Suspense>
             {/* <Link
               href="/faq"
               className={cn([
