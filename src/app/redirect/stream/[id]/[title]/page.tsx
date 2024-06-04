@@ -17,7 +17,7 @@ const RedirectStreamPage = async ({ params: { id } }: Props) => {
 
   if (!data) redirect("/not-found");
 
-  const { end_time, streams } = data as unknown as Conference;
+  const { end_time, streams, start_time } = data as unknown as Conference;
   const hasAired = dayjs().isAfter(end_time);
 
   // find twitch stream from stream link if not default to first
@@ -34,6 +34,28 @@ const RedirectStreamPage = async ({ params: { id } }: Props) => {
     : !!stream
       ? redirect(stream.link)
       : redirect("/not-found");
+
+  // return (
+  //   <>
+  //     <head>
+  //       <title>{stream?.title}</title>
+  //       <meta name="robots" content="noindex, nofollow" />
+
+  //       <meta name="description" content={stream?.title} />
+  //       <meta property="og:title" content={stream?.title} />
+  //       <meta property="og:description" content={stream?.title} />
+
+  //       {/* Twitter */}
+  //       <meta name="twitter:card" content="summary_large_image" />
+  //       <meta name="twitter:title" content={stream?.title} />
+  //       <meta
+  //         name="twitter:description"
+  //         content={`${dayjs(start_time).format("LLL")} - ${dayjs(end_time).format("LLL")}`}
+  //       />
+  //       <meta name="twitter:image" content={stream?.link} />
+  //     </head>
+  //   </>
+  // );
 };
 
 export default RedirectStreamPage;
