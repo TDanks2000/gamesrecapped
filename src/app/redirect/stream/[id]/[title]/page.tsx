@@ -17,7 +17,7 @@ const RedirectStreamPage = async ({ params: { id } }: Props) => {
 
   if (!data) redirect("/not-found");
 
-  const { end_time, streams, start_time } = data as unknown as Conference;
+  const { end_time, streams } = data as unknown as Conference;
   const hasAired = dayjs().isAfter(end_time);
 
   // find twitch stream from stream link if not default to first
@@ -30,9 +30,9 @@ const RedirectStreamPage = async ({ params: { id } }: Props) => {
   );
 
   !!vod && hasAired
-    ? redirect(vod.link)
+    ? redirect(vod.link.reFormatLink())
     : !!stream
-      ? redirect(stream.link)
+      ? redirect(stream.link.reFormatLink())
       : redirect("/not-found");
 
   // return (

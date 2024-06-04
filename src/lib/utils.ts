@@ -19,3 +19,14 @@ export const getImageFromURL = (link: string | null | undefined) => {
       return link;
   }
 };
+
+export const reFormatLink = (link: string) => {
+  return link.replaceAll("youtube.com/embed/", "youtube.com/watch?v=");
+};
+
+String.prototype.reFormatLink = function (this: string, length?: number) {
+  return this.replaceAll("youtube.com/embed/", "youtube.com/watch?v=").slice(
+    0,
+    length ?? Infinity,
+  );
+};

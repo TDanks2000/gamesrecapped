@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "../@types/string.d.ts";
 
 import { GeistSans } from "geist/font/sans";
 
