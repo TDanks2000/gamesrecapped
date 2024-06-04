@@ -13,12 +13,15 @@ import "@/styles/globals.css";
 import Script from "next/script";
 import NextTopLoader from "nextjs-toploader";
 
+const favicon =
+  new Date().getMonth() === 5 ? "/favicon-pride.ico" : "/favicon.ico";
+
 export const metadata = {
   title:
     "Games Recapped | Ultimate Summer Game Fest Recap | Trailers, Livestreams & More",
   description:
     "Discover the ultimate roundup of Summer Game Fest and beyond, featuring trailers, demos, gameplay highlights, livestreams, and exclusive announcements. Stay ahead in the gaming universe with our comprehensive recap, bringing you the latest updates, insights, and reveals from the gaming industry's hottest events",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: favicon }],
 };
 
 export default function RootLayout({
