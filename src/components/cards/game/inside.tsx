@@ -2,8 +2,13 @@ import { type Game } from "@/@types";
 import { Badge } from "@/components/ui/badge";
 import { cn, getImageFromURL } from "@/lib/utils";
 import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 import Image from "next/image";
 import { type FC } from "react";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const GameCardInside: FC<
   Game & {
@@ -79,7 +84,7 @@ const GameCardInside: FC<
           {/* RELEASE DATE */}
           <p className="truncate text-xs text-muted-foreground">
             {release_date
-              ? dayjs(release_date).locale("en").format("MMMM DD, YYYY")
+              ? dayjs.tz(release_date, "Europe/London").format("MMMM DD, YYYY")
               : "TBA"}
           </p>
         </div>
