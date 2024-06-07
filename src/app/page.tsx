@@ -1,6 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import ConferencesView from "@/components/views/conferences";
 import GamesView from "@/components/views/games";
+import HomeConferenceSelectDropdown from "@/components/views/homeConferenceSelectDropdown";
 import HomeDropdown from "@/components/views/homeDropdown";
 
 import { Suspense } from "react";
@@ -22,6 +23,10 @@ export default async function Home({ searchParams }: PageProps) {
           <div className="flex gap-2">
             <Suspense fallback={<div>Loading...</div>}>
               <HomeDropdown />
+            </Suspense>
+
+            <Suspense fallback={<div>Loading...</div>}>
+              <HomeConferenceSelectDropdown />
             </Suspense>
 
             {/* <Button variant="outline" size="sm" className="h-8 gap-2">

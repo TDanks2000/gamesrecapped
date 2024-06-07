@@ -9,6 +9,7 @@ interface GamesViewProps {
   searchParams?: {
     sortGameBy?: "date-asc" | "date-desc" | "newest" | "oldest";
     search?: string;
+    conference_id?: string;
     [key: string]: string | undefined;
   };
 }
@@ -30,6 +31,19 @@ const GamesView: FC<GamesViewProps> = async ({ searchParams }) => {
           .toLowerCase()
           .replace(/\s+/g, "")
           .includes(searchParams.search.toLowerCase().replace(/\s+/g, ""))
+      );
+    });
+  }
+
+  if (searchParams?.conference_id) {
+    games = games?.filter((game) => {
+      if (!game) return false;
+      if (!searchParams?.conference_id) return false;
+      if (searchParams.conference_id === "all") return true;
+
+      return (
+        (game as unknown as Game).conference?.id ===
+        Number(searchParams?.conference_id)
       );
     });
   }

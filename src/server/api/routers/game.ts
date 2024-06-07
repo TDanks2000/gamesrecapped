@@ -56,6 +56,10 @@ export const gameRouter = createTRPCRouter({
         sort: z
           .enum(["date-asc", "date-desc", "newest", "oldest"])
           .default("newest"),
+        conference_id: z
+          .number()
+          .or(z.enum(["all"]))
+          .optional(),
       }),
     )
     .query(({ ctx, input }) => {
@@ -89,6 +93,14 @@ export const gameRouter = createTRPCRouter({
               : input.sort === "newest"
                 ? "desc"
                 : undefined,
+        },
+        where: {
+          conference_id: {
+            equals:
+              (input?.conference_id === "all"
+                ? undefined
+                : input?.conference_id) ?? undefined,
+          },
         },
       });
 

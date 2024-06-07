@@ -26,7 +26,10 @@ export const getConferences = cache(
 );
 
 export const getGames = cache(
-  async (sort?: "date-asc" | "date-desc" | "newest" | "oldest") => {
+  async (
+    sort?: "date-asc" | "date-desc" | "newest" | "oldest",
+    conference_id?: number | "all",
+  ) => {
     const data = await api.game.all({
       sort,
       select: [
@@ -44,6 +47,7 @@ export const getGames = cache(
         GameSelect.release_date,
         GameSelect.title,
       ],
+      conference_id,
     });
 
     return data;
