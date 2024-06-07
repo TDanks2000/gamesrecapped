@@ -78,7 +78,9 @@ const GameCardInside: FC<
           <h3 className="line-clamp-2 text-sm font-semibold">{title}</h3>
           {/* RELEASE DATE */}
           <p className="truncate text-xs text-muted-foreground">
-            {release_date ? dayjs(release_date).format("MMMM DD, YYYY") : "TBA"}
+            {release_date
+              ? dayjs(release_date).locale("en").format("MMMM DD, YYYY")
+              : "TBA"}
           </p>
         </div>
       </div>
