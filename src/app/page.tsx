@@ -1,3 +1,4 @@
+import DefaultLoader from "@/components/loading/default";
 import { Separator } from "@/components/ui/separator";
 import ConferencesView from "@/components/views/conferences";
 import GamesView from "@/components/views/games";
@@ -21,11 +22,11 @@ export default async function Home({ searchParams }: PageProps) {
         <div className="flex justify-between">
           <h1 className="text-2xl font-bold">Games</h1>
           <div className="flex gap-2">
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense>
               <HomeDropdown />
             </Suspense>
 
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<DefaultLoader />}>
               <HomeConferenceSelectDropdown />
             </Suspense>
 
@@ -37,15 +38,15 @@ export default async function Home({ searchParams }: PageProps) {
             </Button> */}
           </div>
         </div>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<DefaultLoader />}>
           <GamesView searchParams={searchParams} />
         </Suspense>
       </div>
-      <div className="relative order-1 flex h-[600px] w-full justify-end md:order-2 md:w-[30%]">
+      <div className="relative order-1 flex h-[600px] w-full justify-end md:order-2 md:w-[30%] md:min-w-[420px]">
         <div className="flex w-full flex-col gap-2 rounded-lg bg-muted/40 p-2">
           <h1 className="text-center text-lg font-bold">Conferences</h1>
           <Separator className="mb-2" />
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<DefaultLoader />}>
             <ConferencesView
               className="w-full pr-3"
               searchParams={searchParams}
