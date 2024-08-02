@@ -20,6 +20,7 @@ const GamesView: FC<GamesViewProps> = async ({ searchParams }) => {
   if (searchParams?.search) {
     games = games?.filter((game) => {
       if (!game) return false;
+      if (!game.hidden) return false;
       if (!searchParams?.search) return false;
 
       return (
@@ -47,6 +48,8 @@ const GamesView: FC<GamesViewProps> = async ({ searchParams }) => {
       );
     });
   }
+
+  games = games.filter((game) => !game?.hidden);
 
   if (!games) return null;
 

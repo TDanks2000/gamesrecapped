@@ -11,6 +11,7 @@ dayjs.extend(isBetween);
 interface ConferencesViewProps extends HTMLAttributes<HTMLDivElement> {
   searchParams?: {
     search?: string;
+    conference_open?: `${boolean}`;
     [key: string]: string | undefined;
   };
 }
@@ -51,7 +52,16 @@ const ConferencesView: FC<ConferencesViewProps> = async ({
   // );
 
   return (
-    <div className="overflow-y-auto">
+    <div
+      className={cn([
+        "overflow-y-auto transition-all",
+        {
+          "h-[600px]": searchParams?.conference_open === "true",
+          "h-full": searchParams?.conference_open === "true",
+          "h-0": searchParams?.conference_open === "false",
+        },
+      ])}
+    >
       <div
         className={cn([
           "flex w-full flex-col gap-3 overflow-hidden",

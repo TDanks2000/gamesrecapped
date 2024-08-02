@@ -39,6 +39,7 @@ export const getGames = cache(
         GameSelect.hasMP,
         GameSelect.hasSP,
         GameSelect.id,
+        GameSelect.hidden,
         GameSelect.isDLC,
         GameSelect.isExcusive,
         GameSelect.isGameUpdate,

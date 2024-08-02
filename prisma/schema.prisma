@@ -23,6 +23,7 @@ model Game {
   hasSP             Boolean
   devloper          String[]
   publisher         String[]
+  hidden            Boolean   @default(false)
 
   media Media[]
 

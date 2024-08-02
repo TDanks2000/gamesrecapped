@@ -4,6 +4,7 @@ import ConferencesView from "@/components/views/conferences";
 import GamesView from "@/components/views/games";
 import HomeConferenceSelectDropdown from "@/components/views/homeConferenceSelectDropdown";
 import HomeDropdown from "@/components/views/homeDropdown";
+import { cn } from "@/lib/utils";
 
 import { Suspense } from "react";
 
@@ -11,6 +12,8 @@ type PageProps = {
   searchParams?: {
     sortGameBy?: "date-asc" | "date-desc";
     search?: string;
+    conference_id?: string;
+    conference_open?: `${boolean}`;
     [key: string]: string | undefined;
   };
 };
@@ -42,10 +45,28 @@ export default async function Home({ searchParams }: PageProps) {
           <GamesView searchParams={searchParams} />
         </Suspense>
       </div>
+
       <div className="relative order-1 flex h-[600px] w-full justify-end md:order-2 md:w-[30%] md:min-w-[420px]">
-        <div className="flex w-full flex-col gap-2 rounded-lg bg-muted/40 p-2">
-          <h1 className="text-center text-lg font-bold">Conferences</h1>
-          <Separator className="mb-2" />
+        <div
+          className={cn(
+            ["relative flex w-full flex-col gap-2 rounded-lg p-2"],
+            {
+              "bg-muted/40 ": searchParams?.conference_open === "true",
+            },
+          )}
+        >
+          {/* <ConferenceToggle /> */}
+
+          <h1
+            className={cn("text-center text-lg font-bold", {
+              hidden: searchParams?.conference_open === "false",
+            })}
+          >
+            Conferences
+          </h1>
+
+          <Separator className={cn("mb-2", { hidden: searchParams })} />
+
           <Suspense fallback={<DefaultLoader />}>
             <ConferencesView
               className="w-full pr-3"
