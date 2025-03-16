@@ -1,6 +1,6 @@
 "use server";
 
-import ConfernceCard from "@/components/cards/conference";
+import ConferenceCard from "@/components/cards/conference";
 import { getConferences } from "@/lib/fetchers";
 import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
@@ -73,7 +73,7 @@ const ConferencesView: FC<ConferencesViewProps> = async ({
           conferences.map((conference, i) => {
             return (
               <div key={conference.id}>
-                <ConfernceCard
+                <ConferenceCard
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
                   {...(conference as any)}
                   isUpNext={i === 0}
