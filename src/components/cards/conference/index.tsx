@@ -12,9 +12,10 @@ import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 import { CalendarIcon } from "lucide-react";
 import type { FC } from "react";
+
 dayjs.extend(isBetween);
 
-interface ConfernceCardProps {
+interface ConferenceCardProps {
   id: number;
   name: string;
   start_time: Date;
@@ -28,23 +29,25 @@ interface ConfernceCardProps {
   isUpNext: boolean;
 }
 
-const ConfernceCard: FC<ConfernceCardProps> = ({
-  name,
-  end_time,
-  start_time,
+const ConferenceCard: FC<ConferenceCardProps> = ({
   id,
+  name,
+  start_time,
+  end_time,
   streams,
   isUpNext,
 }) => {
   const isLive: boolean = dayjs().isBetween(start_time, end_time);
-  const hasAired = dayjs().isAfter(end_time);
+  const hasAired: boolean = dayjs().isAfter(end_time);
 
-  // find twitch stream from stream link if not default to first
+  // Find a Twitch stream from the streams list; default to the first stream if not found
   const stream =
     streams.find((stream) => stream.link.toLowerCase().includes("twitch")) ??
     streams[0];
 
-  const redirectLink = `/redirect/stream/${id}/${encodeURIComponent(name.toLowerCase())}`;
+  const redirectLink = `/redirect/stream/${id}/${encodeURIComponent(
+    name.toLowerCase(),
+  )}`;
 
   return (
     <Tooltip>
@@ -56,22 +59,20 @@ const ConfernceCard: FC<ConfernceCardProps> = ({
               "group transition-all hover:bg-muted/80": !!stream,
             },
           ])}
-          href={!!stream ? redirectLink : undefined}
+          href={stream ? redirectLink : undefined}
           target="_blank"
           rel="noreferrer"
-          key={id}
         >
           <div className="absolute right-1 top-1 max-w-[30%]">
-            {isLive && (
+            {isLive ? (
               <Badge variant="destructive" className="text-xs md:text-sm">
                 LIVE
               </Badge>
-            )}
-            {!isLive && isUpNext && <ConferenceUpNext date={start_time} />}
-
-            {hasAired && !isLive && !isUpNext && (
+            ) : isLive ? (
+              <ConferenceUpNext date={start_time} />
+            ) : hasAired ? (
               <Badge variant="destructive">Aired</Badge>
-            )}
+            ) : null}
           </div>
 
           <div
@@ -96,7 +97,6 @@ const ConfernceCard: FC<ConfernceCardProps> = ({
               <span className="text-xs text-muted-foreground">estimate</span>
             </h1>
           </div>
-          {/* TITLE with icon */}
         </a>
       </TooltipTrigger>
       <TooltipContent
@@ -110,4 +110,4 @@ const ConfernceCard: FC<ConfernceCardProps> = ({
   );
 };
 
-export default ConfernceCard;
+export default ConferenceCard;
